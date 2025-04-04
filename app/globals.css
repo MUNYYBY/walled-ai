@@ -22,7 +22,6 @@
 html {
   font-size: 21px;
   margin: 0 auto;
-  max-width: 1920px;
 }
 
 @media screen and (max-width: 1300px) {
@@ -52,7 +51,6 @@ a {
 }
 
 body {
-  max-width: 1920px;
   margin: 0 auto;
 }
 
