@@ -16,10 +16,9 @@ export default function BackedBy() {
   ];
 
   return (
-    <section className="bg-[#E0DEEC] py-12 sm:py-16 lg:py-20 relative w-full overflow-hidden">
-      <div className="py-2.5" />
+    <section className="relative w-full overflow-hidden bg-[#E0DEEC] py-20">
       <h3
-        className="mb-3 text-center !text-[1.125rem] !text-[#8281B1]"
+        className="mb-3 text-center !text-[18px] !text-[#8281B1]"
         style={{
           fontFamily: "Inter",
           fontWeight: 300,
@@ -41,7 +40,7 @@ export default function BackedBy() {
         freeMode={{ enabled: true, momentum: false }}
         grabCursor={false}
         breakpoints={{
-          320: { slidesPerView: 1 },
+          320: { slidesPerView: 2 },
           640: { slidesPerView: 2 },
           1024: { slidesPerView: 4 },
         }}
