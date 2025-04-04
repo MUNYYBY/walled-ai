@@ -1,0 +1,11 @@
+.create-job-container .MuiOutlinedInput-input{
+    padding: 0.75rem !important;
+}
+
+.create-job-container .dropzone-container {
+    color: gray !important;
+}
+
+.create-job-container .dropzone-container svg {
+    color: gray !important;
+}

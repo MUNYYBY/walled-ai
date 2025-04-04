@@ -1,0 +1,14 @@
+.page_container_main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--rootbackground);
+  padding-inline: 20px;
+  min-height: 100vh;
+}
+
+@media (max-width: 758px) {
+  .page_container_main {
+    padding: 0px;
+  }
+}

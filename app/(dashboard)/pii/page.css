@@ -1,0 +1,10 @@
+.pii-buttons button {
+    background-color: #007bff;
+    color: #fff;
+    /* width: 120px; */
+  }
+  .pii-buttons button:hover {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #0056B3;
+    color: #F0F0F0;
+  }

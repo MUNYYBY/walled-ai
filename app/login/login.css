@@ -1,0 +1,315 @@
+.login-container {
+  display: flex;
+  height: 100vh;
+}
+
+.login-container .left {
+  width: 50%;
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-container .left-top {
+  background-color: #f8f8f8;
+  border-radius: 26px;
+  padding: 2.5rem 6rem;
+  flex-grow: 1;
+  margin-bottom: 1rem;
+}
+
+.login-container .left-top .subtitle-1 {
+  font-size: 26px;
+  display: block;
+}
+
+.login-container .left-top p {
+  font-size: 16px;
+  display: block;
+  color: #021115;
+}
+
+.login-container .left-top .title {
+  font-size: 48px;
+  font-weight: 500;
+  display: block;
+}
+
+.login-container .right {
+  width: 50%;
+  padding: 26px;
+}
+
+.left-top .auth-inputs {
+  display: flex;
+  flex-direction: column;
+}
+
+.left-top .auth-inputs button {
+  background-color: #12add1;
+  border-radius: 5rem;
+}
+
+.left-top .auth-inputs div {
+  margin-bottom: 0.5rem;
+}
+.left-bottom {
+  display: flex;
+  align-items: center;
+  height: 120px;
+  background-color: #f8f8f8;
+  border-radius: 26px;
+  padding: 0 26px;
+}
+.left-bottom .title {
+  display: block;
+  font-size: 18px;
+  font-weight: 400;
+}
+.left-bottom .sub-title {
+  display: block;
+  font-size: 15px;
+  font-weight: 400;
+  color: #021115;
+}
+.right-container {
+  height: 100%;
+  background-image: linear-gradient(
+    to right,
+    rgba(18, 173, 209, 0.5),
+    rgba(59, 76, 202, 0.5)
+  );
+  border-radius: 26px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.right-container img {
+  position: absolute;
+  width: 360px;
+  bottom: 160px;
+}
+
+.right-container .content {
+  background-color: rgba(2, 17, 21, 0.5);
+  border-radius: 1rem;
+  color: #fff;
+  margin: 1.25rem;
+  padding: 1rem;
+  font-size: 28px;
+  z-index: 10;
+}
+/*New CSSS*/
+.login.row {
+  width: 100vw;
+  min-height: 100%;
+  margin: 0;
+}
+.bg-color {
+  background-color: #e0dfec;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: "Inter", serif;
+}
+.login-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.welcome-text {
+  font-size: 25px;
+  font-weight: 400;
+  color: #323150;
+  font-family: "Anek Devanagari", serif;
+}
+.welcome-text-small {
+  font-size: 12px;
+  font-weight: 400;
+  color: #8281b1;
+  margin-top: 0;
+}
+
+button.button-style1 {
+  background: #efeff5;
+  box-shadow: unset;
+  border-radius: 4px;
+  padding: 9px 4px;
+  color: #323150;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: capitalize;
+  gap: 8px;
+}
+button.button-style1:hover {
+  background: #efeff5;
+}
+
+.login-with {
+  font-size: 10px;
+  font-weight: 400;
+  color: #8281b1;
+  position: relative;
+  margin: 12px 0;
+  text-align: center;
+}
+.login-with::after {
+  content: "";
+  height: 1px;
+  background: #c1c0d8;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  right: 0;
+  top: 7px;
+  bottom: 0;
+  z-index: 0;
+}
+.login-with span {
+  background: #e0dfec;
+  position: relative;
+  z-index: 1;
+  padding: 0 13px;
+}
+
+.input {
+  color: #8281b1;
+  font-size: 14px;
+  font-weight: 400;
+  background: #efeff5;
+  border-radius: 0;
+}
+.input input {
+  height: 0.5em;
+  font-size: 12px;
+}
+
+.loginForm svg {
+  width: 0.7em;
+  height: 0.7em;
+}
+.loginForm .MuiTextField-root .MuiOutlinedInput-root {
+  background-color: #efeff5;
+  border-radius: 5rem;
+}
+.loginForm fieldset {
+  border: 0;
+  border-radius: 0;
+}
+.remember-me-style span {
+  font-size: 13px;
+  font-weight: 400;
+}
+.remember-me {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 9px;
+}
+
+.forgot-pass {
+  color: #323150;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+button.button-style2 {
+  background: linear-gradient(
+    90deg,
+    rgba(249, 60, 82, 1) 0%,
+    rgba(43, 33, 243, 1) 100%
+  );
+  box-shadow: unset;
+  border-radius: 4px;
+  padding: 9px 4px;
+  color: #efeff5;
+  font-size: 14px;
+  font-weight: 400;
+  text-transform: capitalize;
+  gap: 8px;
+}
+.dont-have-account {
+  color: #8281b1;
+  font-size: 14px;
+  font-weight: 400;
+  margin-top: 25px;
+}
+.dont-have-account a {
+  text-decoration: unset;
+}
+.login-main {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 40px 80px;
+  width: 100%;
+}
+.slider-big-text {
+  font-size: 25px;
+  color: #323150;
+  font-weight: 400;
+  font-family: "Anek Devanagari", serif;
+}
+
+.slider-small-text {
+  font-size: 14px;
+  color: #8281b1;
+  font-weight: 400;
+}
+.padding-0 {
+  padding: 0 !important;
+}
+.sliders .carousel-caption {
+  bottom: 4%;
+  left: 0;
+  right: 0;
+  padding: 0 45px;
+}
+.height-100,
+.carousel-inner {
+  height: 100%;
+}
+.carousel-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #efeff5;
+}
+.slide-img {
+  object-fit: contain;
+  height: 100%;
+  position: absolute;
+}
+
+.sliders .carousel-indicators [data-bs-target] {
+  background-color: #323150;
+  width: 8px;
+  height: 8px;
+  border-radius: 50px;
+  border: 0;
+}
+.sliders .carousel-indicators {
+  bottom: 0;
+}
+@media (max-width: 768px) {
+  .mobile-none {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .login-main {
+    padding: 40px 20px;
+  }
+  .sliders .carousel-caption {
+    padding: 0 20px;
+  }
+  .slide-img {
+    height: 100%;
+    position: relative;
+  }
+}
