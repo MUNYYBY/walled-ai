@@ -18,7 +18,7 @@ export default function BackedBy() {
   return (
     <section className="relative w-full overflow-hidden bg-[#E0DEEC] py-20">
       <h3
-        className="mb-3 text-center !text-[18px] !text-[#8281B1]"
+        className="mb-3 text-center !text-[1.125rem] !text-[#8281B1]"
         style={{
           fontFamily: "Inter",
           fontWeight: 300,

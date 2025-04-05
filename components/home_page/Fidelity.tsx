@@ -6,7 +6,7 @@ export default function Fidelity() {
   return (
     <>
       <section
-        className="overflow-hidden bg-[#E0DEEC] !bg-cover !bg-center !bg-no-repeat py-12 sm:py-16 lg:py-20"
+        className="overflow-hidden bg-[#E0DEEC] !bg-cover !bg-center !bg-no-repeat pb-12 sm:pb-16 lg:pb-20"
         style={{
           background: `url('/home_page/fidelity_bg.svg')`,
         }}
@@ -23,7 +23,7 @@ export default function Fidelity() {
           </div>
           <div className="space-y-3.5">
             <h2
-              className="!text-[44px] font-semibold !text-[#323150]"
+              className="!text-[2.75rem] font-semibold !text-[#323150]"
               style={{ fontWeight: 400, letterSpacing: "-1px" }}
             >
               <span
@@ -40,7 +40,7 @@ export default function Fidelity() {
               <br />
               without Sharing Data
             </h2>
-            <div className="!space-y-5 !text-[18px]">
+            <div className="!space-y-5 !text-[1.125rem]">
               <p
                 className="max-w-md leading-5"
                 style={{ fontFamily: "Inter", fontWeight: 375 }}
@@ -75,11 +75,11 @@ export default function Fidelity() {
           <div className="absolute top-3/4 left-full h-[500px] w-[500px] rounded-full bg-purple-300 opacity-50 blur-3xl"></div>
         </div>
       </section>
-      <section className="overflow-hidden bg-[#E0DEEC] !bg-cover !bg-center !bg-no-repeat py-12 sm:py-16 lg:py-20">
+      <section className="overflow-hidden bg-[#EFEFF5] !bg-cover !bg-center !bg-no-repeat py-12 sm:py-16 lg:py-20">
         <div className="flex flex-col items-center gap-20 md:flex-row md:justify-center">
           <div className="space-y-3.5">
             <h2
-              className="!text-[44px] -tracking-wider !text-[#323150]"
+              className="!text-[2.75rem] -tracking-wider !text-[#323150]"
               style={{ fontWeight: 400 }}
             >
               Only AI Guardrail with <br /> Overarching
@@ -96,7 +96,7 @@ export default function Fidelity() {
               </span>
             </h2>
             <div className="space-y-3.5">
-              <div className="!mt-4 !space-y-5 !text-[18px]">
+              <div className="!mt-4 !space-y-5 !text-[1.125rem]">
                 <p
                   className="max-w-md leading-5"
                   style={{ fontFamily: "Inter", fontWeight: 375 }}

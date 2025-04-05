@@ -97,14 +97,14 @@ export default function NavBar() {
 
           {/* Desktop Navigation */}
           <div
-            className="hidden items-center text-[18px] lg:flex"
+            className="hidden items-center text-[1.125rem] lg:flex"
             style={{ gap: "0.85rem" }}
           >
             {nav_links.map((nav_link, i) => (
               <Link
                 key={i}
                 href={nav_link.path}
-                className={`!text-sm !text-[18px] !text-[#EFEFF5] transition-all duration-500 !outline-none hover:no-underline`}
+                className={`!text-sm !text-[1.125rem] !text-[#EFEFF5] transition-all duration-500 !outline-none hover:no-underline`}
                 style={{
                   fontFamily: "Inter",
                   fontWeight: 300,
@@ -123,7 +123,7 @@ export default function NavBar() {
             style={{ gap: "1.5rem" }}
           >
             <Link
-              className={`pt-2 text-[18px] text-white !no-underline transition-all duration-500 hover:no-underline`}
+              className={`pt-2 text-[1.125rem] text-white !no-underline transition-all duration-500 hover:no-underline`}
               href={"/login"}
             >
               Login

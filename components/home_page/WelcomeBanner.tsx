@@ -20,7 +20,7 @@ export default function WelcomeBanner() {
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <h1
-            className="!text-[44px] !text-[#EFEFF5]"
+            className="!text-[2.75rem] !text-[#EFEFF5]"
             style={{ fontWeight: 400 }}
           >
             Enterprise
@@ -38,7 +38,7 @@ export default function WelcomeBanner() {
             for End-to-End AI Security
           </h1>
           <p
-            className="!text-[18px]"
+            className="!text-[1.125rem]"
             style={{
               fontFamily: "Inter",
               fontStyle: "normal",

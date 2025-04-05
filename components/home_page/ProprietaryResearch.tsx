@@ -50,6 +50,9 @@ const RESEARCH_DATA: ResearchItem[] = [
 const SWIPER_BREAKPOINTS = {
   640: { slidesPerView: 2 },
   1024: { slidesPerView: 3 },
+  1920: { slidesPerView: 4 },
+  2048: { slidesPerView: 5 },
+  3500: { slidesPerView: 6 },
 };
 
 const ArrowIcon = () => (
@@ -77,11 +80,11 @@ const ArrowIcon = () => (
 
 export default function ProprietaryResearch() {
   return (
-    <section className="bg-[#EEEEF4] py-[3.25rem] sm:py-[4.25rem] lg:py-[5.75rem]">
-      <div className="container mx-auto px-4 w-3/4">
-        <div className="flex flex-col items-center mb-12 text-center">
+    <section className="bg-[#EEEEF4] py-12 sm:py-16 lg:py-20">
+      <div className="container mx-auto w-3/4 px-4">
+        <div className="mb-12 flex flex-col items-center text-center">
           <h2
-            className="!text-[2.75rem] !text-[#323150] -tracking-wide"
+            className="!text-[2.75rem] -tracking-wide !text-[#323150]"
             style={{ fontWeight: 400, margin: 0 }}
           >
             Powered by Years of Proprietary
@@ -107,13 +110,14 @@ export default function ProprietaryResearch() {
               lineHeight: "120%" /* 21.6px */,
               letterSpacing: "-0.72px",
             }}
+            className="!text-[1.125rem]"
           >
             WalledAI is grounded in years of proprietary research on AI systems
             and associated metrics like <br /> safety, security, and
             reliability.
           </p>
           <p
-            className="max-w-6xl text-[1.5rem]"
+            className="max-w-6xl !text-[1.5rem]"
             style={{
               fontWeight: 400,
               fontFamily: "Anek Devanagari",
@@ -126,7 +130,7 @@ export default function ProprietaryResearch() {
           </p>
         </div>
       </div>
-      <div className="container mx-auto relative">
+      <div className="relative mx-auto">
         <Swiper
           modules={[Navigation]}
           spaceBetween={24}
@@ -137,7 +141,7 @@ export default function ProprietaryResearch() {
             prevEl: ".prev",
           }}
           loop
-          className="py-4 px-2"
+          className="px-2 py-4"
         >
           {RESEARCH_DATA.map((research, index) => (
             <SwiperSlide key={index}>
@@ -153,17 +157,17 @@ export default function ProprietaryResearch() {
 }
 
 const ResearchCard = ({ image, title, description }: ResearchItem) => (
-  <div className="max-w-fit p-1 flex flex-col bg-[#E0DEEC] rounded-[1.75rem] overflow-hidden transition-all hover:shadow-lg">
-    <div className="relative w-full aspect-video">
+  <div className="flex h-96 max-w-fit flex-col overflow-hidden rounded-[1.75rem] bg-[#E0DEEC] p-1 transition-all hover:shadow-lg">
+    <div className="relative aspect-video w-full">
       <Image
         src={image}
         alt={title}
         width={350}
         height={185}
-        className="w-full h-full object-cover"
+        className="h-full w-full object-cover"
       />
     </div>
-    <div className="!py-[1rem] !px-[0.925rem] flex-1 flex items-end gap-1">
+    <div className="flex flex-1 items-end gap-1 !px-[0.925rem] !py-[1rem]">
       <div>
         <span
           className="!text-2xl font-semibold !text-[#323150]"
@@ -188,7 +192,7 @@ const ResearchCard = ({ image, title, description }: ResearchItem) => (
           {description}
         </p>
       </div>
-      <div className="!mr-2 !mb-2 p-2.5 !bg-[#EFEFF5] rounded-full">
+      <div className="!mr-2 !mb-2 rounded-full !bg-[#EFEFF5] p-2.5">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="15"
@@ -215,16 +219,16 @@ const ResearchCard = ({ image, title, description }: ResearchItem) => (
 );
 
 const NavigationControls = () => (
-  <div className="h-10 flex items-center justify-center gap-3.5 mt-4">
+  <div className="mt-4 flex h-10 items-center justify-center gap-3.5">
     <button
-      className="prev p-2.5 h-full flex items-center justify-center border-[1.75px] border-[#A1A0C5] !rounded-sm rotate-180 transition-all z-10 hover:bg-gray-100"
+      className="prev z-10 flex h-full rotate-180 items-center justify-center !rounded-sm border-[1.75px] border-[#A1A0C5] p-2.5 transition-all hover:bg-gray-100"
       aria-label="Previous slide"
     >
       <ArrowIcon />
     </button>
     <Link
       href={"/coming-soon"}
-      className="max-w-md w-full h-full flex items-center justify-center !text-[#323050] text-sm border-[1.75px] border-[#A1A0C5] !rounded-[4px] hover:bg-gray-100"
+      className="flex h-full w-full max-w-md items-center justify-center !rounded-[4px] border-[1.75px] border-[#A1A0C5] text-sm !text-[#323050] hover:bg-gray-100"
       style={{
         fontFamily: "Inter",
         fontWeight: 400,
@@ -237,7 +241,7 @@ const NavigationControls = () => (
       </button>
     </Link>
     <button
-      className="next p-2.5 h-full flex items-center justify-center border-[1.75px] border-[#A1A0C5] !rounded-sm transition-all z-10 hover:bg-gray-100"
+      className="next z-10 flex h-full items-center justify-center !rounded-sm border-[1.75px] border-[#A1A0C5] p-2.5 transition-all hover:bg-gray-100"
       aria-label="Next slide"
     >
       <ArrowIcon />

@@ -36,7 +36,7 @@ export default function ProtectionProcess() {
           className="mx-auto w-full space-y-3.5 text-center"
         >
           <h2
-            className="!text-[38px] !text-[#EFEFF5] md:!text-[44px]"
+            className="!text-[38px] !text-[#EFEFF5] md:!text-[2.75rem]"
             style={{
               fontWeight: 400,
             }}
@@ -56,7 +56,7 @@ export default function ProtectionProcess() {
             for AI in Production
           </h2>
           <p
-            className="!text-[18px] !text-[#E0DFEC]"
+            className="!text-[1.125rem] !text-[#E0DFEC]"
             style={{ fontFamily: "Inter", fontWeight: 300, lineHeight: "120%" }}
           >
             WalledAI&apos;s guardrail solutions offer a one-stop solution to
@@ -88,7 +88,7 @@ export default function ProtectionProcess() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.2, duration: 0.8, ease: "easeOut" }}
               >
-                <div className="relative min-h-36 space-y-2.5">
+                <div className="relative flex min-h-36 flex-col space-y-2.5">
                   <Link
                     className="absolute top-0 right-0 flex rotate-45 items-center justify-center gap-2.5 rounded-full !bg-[#4F4E7E] p-2 transition-all duration-300 group-hover:rotate-0 group-hover:bg-gradient-to-r group-hover:from-[#F93C52] group-hover:to-[#2B21F3]"
                     href={process.link}
@@ -115,7 +115,7 @@ export default function ProtectionProcess() {
                     </svg>
                   </Link>
                   <h3
-                    className="text-xl font-medium !text-[#4F4E7E] transition-all duration-300 group-hover:!text-white md:!text-2xl"
+                    className="text-left text-xl font-medium !text-[#4F4E7E] transition-all duration-300 group-hover:!text-white md:!text-2xl"
                     style={{
                       fontFamily: "Inter",
                       fontWeight: 600,
@@ -124,7 +124,7 @@ export default function ProtectionProcess() {
                     {process.title}
                   </h3>
                   <p
-                    className="text-sm !text-[#4F4E7E] transition-all duration-300 group-hover:!text-white md:text-[0.925rem]"
+                    className="text-left text-sm !text-[#4F4E7E] transition-all duration-300 group-hover:!text-white md:!text-[0.925rem]"
                     style={{ fontFamily: "Inter", fontWeight: 300 }}
                   >
                     {process.description}

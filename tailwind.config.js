@@ -18,6 +18,11 @@ module.exports = {
       fontFamily: {
         anek: "var(--anek)",
       },
+      fontSize: {
+        headingText: "2.75rem",
+        normalText: "1.1rem",
+        baseText: "1.8rem",
+      },
     },
   },
   plugins: [],

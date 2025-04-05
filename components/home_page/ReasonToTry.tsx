@@ -4,13 +4,13 @@ import React from "react";
 export default function ReasonToTry() {
   return (
     <section
-      className="relative bg-[#E0DEEC] py-12 sm:py-16 lg:py-20 !bg-center !bg-cover !bg-no-repeat"
+      className="relative bg-[#E0DEEC] !bg-cover !bg-center !bg-no-repeat py-12 sm:py-16 lg:py-20"
       style={{
         background: `url('/home_page/reason_to_try_bg.svg')`,
       }}
     >
-      <div className="pt-[2.5rem] container mx-auto flex items-center gap-[2.5rem]">
-        <div className="w-[40%] max-w-sm ">
+      <div className="container mx-auto flex items-center gap-[2.5rem] pt-[2.5rem]">
+        <div className="w-[40%] max-w-sm">
           <h2
             className="!text-[2.75rem] -tracking-wider"
             style={{ fontWeight: 400 }}
@@ -28,7 +28,7 @@ export default function ReasonToTry() {
             </span>
           </h2>
           <p
-            className="!mt-3.5 leading-5"
+            className="!mt-3.5 !text-[1.125rem] leading-5"
             style={{
               fontFamily: "Inter",
               fontWeight: 375,
@@ -41,7 +41,7 @@ export default function ReasonToTry() {
           <div className="!mt-14 !space-y-4">
             <div className="group transition-all duration-500">
               <h3
-                className="!text-2xl opacity-50 group-hover:!opacity-100 transition-all duration-300"
+                className="!text-2xl opacity-50 transition-all duration-300 group-hover:!opacity-100"
                 style={{
                   color: "#323150",
                   fontFamily: "Anek Devanagari",
@@ -52,9 +52,9 @@ export default function ReasonToTry() {
               >
                 Sleek Dashboards to Help You Stay on Top of Things
               </h3>
-              <div className="bg-[#EFEFF5] w-full h-[0.25rem] rounded-full mt-2 relative overflow-hidden">
+              <div className="relative mt-2 h-[0.25rem] w-full overflow-hidden rounded-full bg-[#EFEFF5]">
                 <div
-                  className="absolute top-0 left-0 h-full w-[0] rounded-full group-hover:w-full transition-all duration-500"
+                  className="absolute top-0 left-0 h-full w-[0] rounded-full transition-all duration-500 group-hover:w-full"
                   style={{
                     background:
                       " linear-gradient(92.82deg, #F93C52 -56.34%, #2B21F3 130.6%)",
@@ -64,7 +64,7 @@ export default function ReasonToTry() {
             </div>
             <div className="group transition-all duration-500">
               <h3
-                className="!text-2xl opacity-50 group-hover:!opacity-100 transition-all duration-300"
+                className="!text-2xl opacity-50 transition-all duration-300 group-hover:!opacity-100"
                 style={{
                   color: "#323150",
                   fontFamily: "Anek Devanagari",
@@ -75,9 +75,9 @@ export default function ReasonToTry() {
               >
                 Effortless Performance Even in Edgy Situations
               </h3>
-              <div className="bg-[#EFEFF5] w-full h-[0.25rem] rounded-full mt-2 relative overflow-hidden">
+              <div className="relative mt-2 h-[0.25rem] w-full overflow-hidden rounded-full bg-[#EFEFF5]">
                 <div
-                  className="absolute top-0 left-0 h-full w-[0] rounded-full group-hover:w-full transition-all duration-500"
+                  className="absolute top-0 left-0 h-full w-[0] rounded-full transition-all duration-500 group-hover:w-full"
                   style={{
                     background:
                       " linear-gradient(92.82deg, #F93C52 -56.34%, #2B21F3 130.6%)",
