@@ -5,7 +5,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { FiMenu, FiX } from "react-icons/fi";
-import { usePathname } from "next/navigation";
 import clsx from "clsx";
 
 export default function NavBar() {
@@ -38,23 +37,6 @@ export default function NavBar() {
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
-
-  const pathname = usePathname();
-
-  if (
-    pathname === "/login" ||
-    pathname === "/sign-up" ||
-    pathname === "/forgot" ||
-    pathname === "/forgot-otp" ||
-    pathname === "/change-password" ||
-    pathname === "/dashboard" ||
-    pathname === "/pii" ||
-    pathname === "/guard-rail/playground" ||
-    pathname === "/hallucination" ||
-    pathname === "/coming-soon"
-  ) {
-    return;
-  }
 
   return (
     <>

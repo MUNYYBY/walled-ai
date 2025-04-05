@@ -5,7 +5,7 @@ import { Autoplay, FreeMode } from "swiper/modules";
 import Image from "next/image";
 import "swiper/css";
 
-export default function BackedBy() {
+export default function BackedBy({ text }: { text?: string }) {
   const backedItems = [
     "/home_page/backed_by/amazon.svg",
     "/home_page/backed_by/ibda.svg",
@@ -24,7 +24,7 @@ export default function BackedBy() {
           fontWeight: 300,
         }}
       >
-        Backed by
+        {text ?? "Backed by"}
       </h3>
       <Swiper
         modules={[Autoplay, FreeMode]}

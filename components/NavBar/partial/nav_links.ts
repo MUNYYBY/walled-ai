@@ -9,7 +9,7 @@ const nav_links = [
   },
   {
     title: "About Us",
-    path: "#contactEmailSection",
+    path: "/about-us/",
   },
   {
     title: "Pricing",
