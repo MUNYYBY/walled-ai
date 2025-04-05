@@ -9,8 +9,8 @@ export default function ReasonToTry() {
         background: `url('/home_page/reason_to_try_bg.svg')`,
       }}
     >
-      <div className="container mx-auto flex flex-col items-center gap-[2.5rem] md:flex-row">
-        <div className="md:w-[40%] md:max-w-sm">
+      <div className="container mx-auto flex flex-col items-center gap-[2.5rem] lg:flex-row">
+        <div className="lg:w-[40%] lg:max-w-sm">
           <h2
             className="!text-[2.75rem] -tracking-wider"
             style={{ fontWeight: 400 }}

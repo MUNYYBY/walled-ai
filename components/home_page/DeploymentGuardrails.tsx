@@ -44,7 +44,7 @@ export default function DeploymentGuardrails() {
               control.
             </p>
           </div>
-          <div className="flex flex-col items-center justify-center gap-4 md:flex-row">
+          <div className="flex flex-col items-center justify-center gap-4 lg:flex-row">
             <Image
               src={"/home_page/deployments/deploy-1.svg"}
               width={1050}

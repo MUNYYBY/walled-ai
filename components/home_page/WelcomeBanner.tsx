@@ -6,12 +6,7 @@ import { motion } from "framer-motion";
 
 export default function WelcomeBanner() {
   return (
-    <section
-      className={`relative !bg-cover !bg-center !bg-no-repeat py-24 md:py-20`}
-      style={{
-        background: `url(/home_page/main_banner.svg)`,
-      }}
-    >
+    <section className="relative w-full bg-[url('/home_page/main_banner.svg')] bg-cover bg-center bg-no-repeat py-24 md:py-20">
       <div className="text-[var(--anek) z-[1] flex items-center justify-center pt-16">
         <motion.div
           className="container mx-auto space-y-3.5 text-center"
@@ -49,8 +44,8 @@ export default function WelcomeBanner() {
               opacity: 0.9,
             }}
           >
-            WalledAI’s guardrails provide customizable on-premises protection
-            for AI systems
+            WalledAI{"'"}s guardrails provide customizable on-premises
+            protection for AI systems
             <br /> to enable effortless compliance, safety, and data security
           </p>
           <motion.div
