@@ -10,7 +10,7 @@ export default function ReasonToTry() {
       }}
     >
       <div className="container mx-auto flex flex-col items-center gap-[2.5rem] lg:flex-row">
-        <div className="lg:w-[40%] lg:max-w-sm">
+        <div className="lg:!w-[40%] lg:!max-w-sm">
           <h2
             className="!text-[2.75rem] -tracking-wider"
             style={{ fontWeight: 400 }}
@@ -41,7 +41,7 @@ export default function ReasonToTry() {
           <div className="!mt-14 !space-y-4">
             <div className="group transition-all duration-500">
               <h3
-                className="!text-2xl opacity-100 transition-all duration-300 group-hover:!opacity-100 md:opacity-50"
+                className="!text-2xl opacity-100 transition-all duration-300 md:!opacity-50 md:group-hover:opacity-100"
                 style={{
                   color: "#323150",
                   fontFamily: "Anek Devanagari",
@@ -64,7 +64,7 @@ export default function ReasonToTry() {
             </div>
             <div className="group transition-all duration-500">
               <h3
-                className="!text-2xl opacity-100 transition-all duration-300 group-hover:!opacity-100 md:opacity-50"
+                className="!text-2xl opacity-100 transition-all duration-300 group-hover:!opacity-100 md:!opacity-50"
                 style={{
                   color: "#323150",
                   fontFamily: "Anek Devanagari",

@@ -5,6 +5,7 @@ import WelcomeBanner from "@/components/home_page/WelcomeBanner";
 import ReasonToTry from "@/components/home_page/ReasonToTry";
 import Backed_By from "@/components/home_page/Backed_By";
 import Fidelity from "@/components/home_page/Fidelity";
+import CompanyTestamonials from "@/components/home_page/CompanyTestamonials";
 
 export default function Page() {
   return (
@@ -16,6 +17,7 @@ export default function Page() {
       <Deployment />
       <ProprietaryResearch />
       <ReasonToTry />
+      <CompanyTestamonials />
     </div>
   );
 }
