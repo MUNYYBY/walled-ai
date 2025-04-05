@@ -6,6 +6,7 @@ import ReasonToTry from "@/components/home_page/ReasonToTry";
 import Backed_By from "@/components/home_page/Backed_By";
 import Fidelity from "@/components/home_page/Fidelity";
 import CompanyTestamonials from "@/components/home_page/CompanyTestamonials";
+import InsightsOnResearch from "@/components/home_page/InsightsOnResearch";
 
 export default function Page() {
   return (
@@ -18,6 +19,7 @@ export default function Page() {
       <ProprietaryResearch />
       <ReasonToTry />
       <CompanyTestamonials />
+      <InsightsOnResearch />
     </div>
   );
 }
