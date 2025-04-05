@@ -2,7 +2,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import footer_sections from "./partial/sections";
-import { usePathname } from "next/navigation";
 import axios from "axios";
 import baseUrl from "@/utils/baseUrl";
 import { useEffect, useState } from "react";
@@ -20,7 +19,7 @@ declare global {
 
 export default function Footer() {
   const socialIcons: SocialIcon[] = [
-    // { src: "/icons/twiter.svg", alt: "Twitter", href: "https://twitter.com" },
+    { src: "/icons/twiter.svg", alt: "Twitter", href: "https://twitter.com" },
     {
       src: "/icons/linked_in.svg",
       alt: "LinkedIn",
@@ -30,7 +29,6 @@ export default function Footer() {
 
   const currentYear = new Date().getFullYear();
 
-  const pathname = usePathname();
   const [email, setEmail] = useState("");
   const [contacted, setContacted] = useState(false);
   const [contactIsProcessing, setContactIsProcessing] = useState(false);
@@ -51,20 +49,6 @@ export default function Footer() {
     };
     document.body.appendChild(script);
   }, []);
-  if (
-    pathname === "/login" ||
-    pathname === "/sign-up" ||
-    pathname === "/forgot" ||
-    pathname === "/forgot-otp" ||
-    pathname === "/change-password" ||
-    pathname === "/dashboard" ||
-    pathname === "/pii" ||
-    pathname === "/guard-rail/playground" ||
-    pathname === "/hallucination" ||
-    pathname === "/coming-soon"
-  ) {
-    return;
-  }
 
   const handleReCaptchaVerify = async () => {
     return new Promise((resolve) => {
@@ -106,14 +90,14 @@ export default function Footer() {
       setEmail("");
       setContactIsProcessing(false);
       setResponseMessage(
-        "Thanks for showing your interest. We will be in touch soon!"
+        "Thanks for showing your interest. We will be in touch soon!",
       );
       setIsError(false);
       return res;
     } catch (error: any) {
       setResponseMessage(
         error.response?.data?.message ||
-          "Something went wrong. Please try again."
+          "Something went wrong. Please try again.",
       );
       setIsError(true);
       console.log("error", error);
@@ -123,19 +107,17 @@ export default function Footer() {
 
   return (
     <footer
-      className={`hidden md:block relative bg-[#E0DEEC] py-12 sm:py-16 lg:py-20 !bg-center !bg-cover !bg-no-repeat !space-y-5 overflow-hidden`}
+      className={`relative !space-y-5 overflow-hidden bg-[#E0DEEC] !bg-cover !bg-center !bg-no-repeat py-20`}
       style={{
         background: `url('/footer_bg.svg')`,
       }}
     >
-      <div className="absolute top-0 -left-20 siz-[25rem] rounded-full bg-fuchsia-400 opacity-25 blur-[100px]"></div>
-
-      <div className="!space-y-5">
+      <div className="container !space-y-5">
         {/* CTA Section */}
-        <div className="text-center !space-y-1 py-3.5">
-          <h2 className="!text-[2.75rem] " style={{ fontWeight: 400 }}>
+        <div className="!space-y-1 py-3.5 text-center">
+          <h2 className="!text-[2.75rem]" style={{ fontWeight: 400 }}>
             <span
-              className="px-1.5 bg-clip-text text-transparent"
+              className="bg-clip-text px-1.5 text-transparent"
               style={{
                 backgroundImage:
                   "linear-gradient(92.82deg, rgb(249, 60, 82) -56.34%, rgb(43, 33, 243) 130.6%)  ",
@@ -148,7 +130,7 @@ export default function Footer() {
             Without Serious Commitments
           </h2>
           <p
-            className="text-sm sm:text-base text-center"
+            className="text-center text-sm sm:text-base"
             style={{
               color: "#323150",
               fontFamily: "Inter",
@@ -163,7 +145,7 @@ export default function Footer() {
         </div>
         {contacted ? (
           <div
-            className="text-green-600 text-center"
+            className="text-center text-green-600"
             style={{ color: "#4b25da", fontSize: "1em" }}
           >
             Thanks for showing your interest. We will be in touch with you soon.
@@ -171,7 +153,7 @@ export default function Footer() {
         ) : null}
         <div
           id="contactEmailSection"
-          className="bg-[#EEEEF4] px-3.5 py-2.5 rounded-md flex flex-col sm:flex-row gap-5 max-w-3xl mx-auto"
+          className="mx-auto flex max-w-3xl flex-col gap-5 rounded-md bg-[#EEEEF4] px-3.5 py-2.5 sm:flex-row"
         >
           <>
             <input
@@ -181,10 +163,10 @@ export default function Footer() {
               }}
               type="email"
               placeholder="yourname@email.com"
-              className="flex-grow px-2.5 py-0.5 pt-1.5 border-none outline-none"
+              className="flex-grow border-none px-2.5 py-0.5 pt-1.5 outline-none"
             />
             <button
-              className="px-8 py-1.5 flex items-center justify-center !text-sm text-white !rounded-sm transition-all duration-500"
+              className="flex items-center justify-center !rounded-sm px-8 py-1.5 !text-sm text-white transition-all duration-500"
               style={{
                 background:
                   "linear-gradient(92.82deg, #F93C52 -56.34%, #2B21F3 130.6%)",
@@ -199,9 +181,9 @@ export default function Footer() {
         </div>
       </div>
       {/* Footer Links */}
-      <div className="pt-14 container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10">
+      <div className="container mx-auto grid grid-cols-2 gap-10 pt-14 md:grid-cols-2 lg:grid-cols-6">
         {/* Logo and Social */}
-        <div className="lg:col-span-2 flex flex-col gap-3.5">
+        <div className="col-span-2 flex flex-col gap-3.5">
           <Link href="/" className="inline-block">
             <Image
               src="/images/walledailogo.png"
@@ -266,7 +248,7 @@ export default function Footer() {
                 <li key={linkIndex}>
                   <Link
                     href={link.href}
-                    className="!text-sm !font-light !text-[#323050] hover:underline transition-all duration-300"
+                    className="!text-sm !font-light !text-[#323050] transition-all duration-300 hover:underline"
                     style={{
                       /* Inter 18px/Light - Body Text */
                       fontFamily: "Inter",

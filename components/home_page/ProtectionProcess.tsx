@@ -27,7 +27,7 @@ export default function ProtectionProcess() {
   ];
 
   return (
-    <section className="relative container mx-auto px-4 py-12 sm:py-16 lg:py-20">
+    <section className="relative container mx-auto px-4 py-20">
       <div className="z-[1] flex items-center justify-center">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -36,7 +36,7 @@ export default function ProtectionProcess() {
           className="mx-auto w-full space-y-3.5 text-center"
         >
           <h2
-            className="!text-[38px] !text-[#EFEFF5] md:!text-[2.75rem]"
+            className="text-center !text-[38px] !text-[#EFEFF5] md:!text-[2.75rem]"
             style={{
               fontWeight: 400,
             }}
@@ -53,6 +53,7 @@ export default function ProtectionProcess() {
             >
               Protection
             </span>
+            <br className="block md:hidden" />
             for AI in Production
           </h2>
           <p

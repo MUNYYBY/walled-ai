@@ -80,16 +80,16 @@ const ArrowIcon = () => (
 
 export default function ProprietaryResearch() {
   return (
-    <section className="bg-[#EEEEF4] py-12 sm:py-16 lg:py-20">
+    <section className="bg-[#EEEEF4] py-20">
       <div className="container mx-auto w-3/4 px-4">
         <div className="mb-12 flex flex-col items-center text-center">
           <h2
-            className="!text-[2.75rem] -tracking-wide !text-[#323150]"
+            className="text-center !text-[2.75rem] -tracking-wide !text-[#323150]"
             style={{ fontWeight: 400, margin: 0 }}
           >
-            Powered by Years of Proprietary
+            Powered by Years of Proprietary{" "}
             <span
-              className="!ml-2 bg-clip-text text-transparent"
+              className="bg-clip-text text-transparent"
               style={{
                 backgroundImage:
                   "linear-gradient(93deg, #F93C52 -56.34%, #2B21F3 130.6%)",
@@ -219,7 +219,7 @@ const ResearchCard = ({ image, title, description }: ResearchItem) => (
 );
 
 const NavigationControls = () => (
-  <div className="mt-4 flex h-10 items-center justify-center gap-3.5">
+  <div className="mx-2 mt-4 flex h-10 items-center justify-center gap-3.5">
     <button
       className="prev z-10 flex h-full rotate-180 items-center justify-center !rounded-sm border-[1.75px] border-[#A1A0C5] p-2.5 transition-all hover:bg-gray-100"
       aria-label="Previous slide"

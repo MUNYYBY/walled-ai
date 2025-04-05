@@ -6,7 +6,7 @@ export default function DeploymentGuardrails() {
   return (
     <>
       <section
-        className="flex flex-col items-center gap-10 bg-[#E0DEEC] !bg-cover !bg-no-repeat py-12 sm:py-16 lg:py-20"
+        className="flex flex-col items-center gap-10 bg-[#E0DEEC] !bg-cover !bg-no-repeat py-20"
         style={{
           background: `url('/home_page/deployment_bg.svg')`,
         }}
@@ -15,7 +15,7 @@ export default function DeploymentGuardrails() {
           <div className="flex flex-col items-center">
             <div className="space-y-3.5">
               <h2
-                className="!text-[2.75rem] -tracking-wide !text-[#323150]"
+                className="text-center !text-[2.75rem] -tracking-wide !text-[#323150]"
                 style={{ fontWeight: 400 }}
               >
                 <span
@@ -44,17 +44,34 @@ export default function DeploymentGuardrails() {
               control.
             </p>
           </div>
-          <Image
-            src={"/home_page/deployments.svg"}
-            width={1050}
-            height={450}
-            alt=""
-          />
+          <div className="flex flex-col items-center justify-center gap-4 md:flex-row">
+            <Image
+              src={"/home_page/deployments/deploy-1.svg"}
+              width={1050}
+              height={450}
+              alt=""
+            />
+            <Image
+              src={"/home_page/deployments/deploy-2.svg"}
+              width={1050}
+              height={450}
+              alt=""
+            />
+            <Image
+              src={"/home_page/deployments/deploy-3.svg"}
+              width={1050}
+              height={450}
+              alt=""
+            />
+          </div>
           <p
             className="text-center !text-[1.125rem]"
             style={{ fontFamily: "Inter", fontWeight: 375 }}
           >
-            <Link className="!text-[#2B21F3] !underline" href={"/coming-soon"}>
+            <Link
+              className="text-left !text-[#2B21F3] !underline md:text-center"
+              href={"/coming-soon"}
+            >
               Connect with our experts
             </Link>{" "}
             to explore the ideal guardrail setup for your use case
@@ -62,15 +79,15 @@ export default function DeploymentGuardrails() {
         </div>
       </section>
       <section
-        className="flex flex-col items-center gap-10 overflow-hidden !bg-cover !bg-center !bg-no-repeat py-12 sm:py-16 lg:py-20"
+        className="flex flex-col items-center gap-10 overflow-hidden !bg-cover !bg-center !bg-no-repeat py-20"
         style={{
           background: `url('/home_page/comparison_bg.svg')`,
         }}
       >
         <div className="container flex flex-col items-center gap-10">
-          <div className="flex flex-col items-center !gap-[0.5rem]">
+          <div className="item-start flex flex-col !gap-[0.5rem] md:items-center">
             <h2
-              className="!text-[2.75rem] -tracking-wide !text-[#EFEFF5]"
+              className="text-center !text-[2.75rem] -tracking-wide !text-[#EFEFF5]"
               style={{ fontWeight: 400, margin: 0 }}
             >
               <span
@@ -96,14 +113,14 @@ export default function DeploymentGuardrails() {
             </p>
 
             <p
-              className="!mt-2 max-w-6xl text-base text-[1.5rem] text-white"
+              className="!mt-2 max-w-6xl text-center text-base text-[1.5rem] text-white"
               style={{ fontWeight: 300, fontFamily: "Anek Devanagari" }}
             >
               Make the switch to enjoy sturdier AI protection that provides more
               bang for your buck.
             </p>
             <Link
-              className="flex items-center justify-center rounded-[4px] border-[1.75px] border-[#A1A0C5] px-4 py-2.5 text-sm !text-[#EFEFF5] no-underline hover:no-underline"
+              className="flex items-center justify-center rounded-[4px] border-[1.75px] border-[#A1A0C5] px-4 py-2.5 text-center text-sm !text-[#EFEFF5] no-underline hover:no-underline"
               href={"/coming-soon"}
             >
               <button
