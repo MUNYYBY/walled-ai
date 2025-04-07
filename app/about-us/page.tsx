@@ -1,5 +1,6 @@
 import HeroSection from "@/components/AboutUs/HeroSection";
 import MessionAndVision from "@/components/AboutUs/MessionAndVision";
+import Team from "@/components/AboutUs/Team";
 import BackedBy from "@/components/home_page/Backed_By";
 import React from "react";
 
@@ -9,6 +10,7 @@ export default function AboutUs() {
       <HeroSection />
       <BackedBy text="Backed By the Very Best in AI" />
       <MessionAndVision />
+      <Team />
     </div>
   );
 }
