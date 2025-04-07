@@ -70,7 +70,7 @@ export default function DeploymentGuardrails() {
           >
             <Link
               className="text-left !text-[#2B21F3] !underline md:text-center"
-              href={"/coming-soon"}
+              href={"#contactEmailSection"}
             >
               Connect with our experts
             </Link>{" "}
@@ -121,7 +121,7 @@ export default function DeploymentGuardrails() {
             </p>
             <Link
               className="flex items-center justify-center rounded-[4px] border-[1.75px] border-[#A1A0C5] px-4 py-2.5 text-center text-sm !text-[#EFEFF5] no-underline hover:no-underline"
-              href={"/coming-soon"}
+              href={"#contactEmailSection"}
             >
               <button
                 className=""

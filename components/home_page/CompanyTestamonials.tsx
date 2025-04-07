@@ -117,7 +117,7 @@ export default function CompanyTestimonials() {
       </div>
 
       {/* Carousel Container with Edge Gradients */}
-      <div className="w-full max-w-screen-xl">
+      <div className="w-full">
         {/* Left Gradient Fade */}
         <div className="absolute top-0 left-0 z-10 h-full w-24 bg-gradient-to-r from-black/50 to-transparent"></div>
 

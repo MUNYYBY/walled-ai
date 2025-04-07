@@ -25,25 +25,19 @@ const RESEARCH_DATA: ResearchItem[] = [
     image: "/home_page/research_1.svg",
     title: "RAG",
     description:
-      "MEASURING AND ENHANCING TRUSTWORTHINESS OF LLMS IN RAG THROUGH GROUNDED...",
+      "Measuring and Enhancing Trustworthiness of LLMs in RAG through Grounded...",
   },
   {
-    image: "/home_page/research_2.svg",
+    image: "/home_page/research_3.svg",
     title: "Ferret",
     description:
       "Faster and Effective Automated Red Teaming with Reward-Based Scoring Technique",
   },
   {
-    image: "/home_page/research_1.svg",
-    title: "Model",
+    image: "/home_page/research_4.svg",
+    title: "RED-EVAL",
     description:
-      "Framework for explaining model decisions while maintaining performance.",
-  },
-  {
-    image: "/home_page/research_2.svg",
-    title: "Guardrails",
-    description:
-      "Architecture patterns for safe production deployment of generative AI.",
+      "Red-Teaming Large Language Models using Chain of Utterances for Safety-Alignment",
   },
 ];
 
@@ -157,7 +151,7 @@ export default function ProprietaryResearch() {
 }
 
 const ResearchCard = ({ image, title, description }: ResearchItem) => (
-  <div className="flex h-96 max-w-fit flex-col overflow-hidden rounded-[1.75rem] bg-[#E0DEEC] p-1 transition-all hover:shadow-lg">
+  <div className="flex h-96 max-w-fit flex-col overflow-hidden rounded-[1.75rem] bg-[#E0DEEC] p-1 transition-all hover:shadow-lg 2xl:h-fit">
     <div className="relative aspect-video w-full">
       <Image
         src={image}
@@ -227,7 +221,7 @@ const NavigationControls = () => (
       <ArrowIcon />
     </button>
     <Link
-      href={"/coming-soon"}
+      href={"#contactEmailSection"}
       className="flex h-full w-full max-w-md items-center justify-center !rounded-[4px] border-[1.75px] border-[#A1A0C5] text-sm !text-[#323050] hover:bg-gray-100"
       style={{
         fontFamily: "Inter",

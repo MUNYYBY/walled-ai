@@ -116,7 +116,10 @@ export default function Fidelity() {
                 className="max-w-md leading-5"
                 style={{ fontFamily: "Inter", fontWeight: 375 }}
               >
-                <Link href={"/contact"} className="!text-[#2B21F3] !underline">
+                <Link
+                  href="#contactEmailSection"
+                  className="!text-[#2B21F3] !underline"
+                >
                   Book a call
                 </Link>{" "}
                 with our support team to explore enterprise customization

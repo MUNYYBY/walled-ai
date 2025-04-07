@@ -141,7 +141,7 @@ const ResearchCard = ({
   avatar,
   description,
 }: any) => (
-  <div className="flex h-[25.5rem] max-w-fit flex-col overflow-hidden rounded-[1.75rem] bg-[#EFEFF5] p-1 transition-all">
+  <div className="flex h-[25.5rem] max-w-fit flex-col overflow-hidden rounded-[1.75rem] bg-[#EFEFF5] p-1 transition-all 2xl:h-fit">
     <div className="flex items-start justify-start gap-2 p-3 pb-1">
       <Image src={avatar} alt={name} width={60} height={185} className="" />
       <div className="flex flex-col gap-1">
@@ -224,7 +224,7 @@ const NavigationControls = () => (
       <ArrowIcon />
     </button>
     <Link
-      href={"/coming-soon"}
+      href={"#contactEmailSection"}
       className="flex h-full items-center justify-center !rounded-[4px] border-[1.75px] border-[#A1A0C5] !bg-[#EFEFF5] px-12 text-sm !text-[#323050]"
       style={{
         fontFamily: "Inter",
