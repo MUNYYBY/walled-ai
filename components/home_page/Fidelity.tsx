@@ -42,14 +42,14 @@ export default function Fidelity() {
             </h2>
             <div className="!space-y-5 !text-[1.125rem]">
               <p
-                className="max-w-md leading-5"
+                className="max-w-lg leading-5"
                 style={{ fontFamily: "Inter", fontWeight: 375 }}
               >
                 Supercharge AI deployments without sharing data outside
                 enterprise bounds.
               </p>
               <p
-                className="max-w-md leading-5"
+                className="max-w-lg leading-5"
                 style={{ fontFamily: "Inter", fontWeight: 375 }}
               >
                 WalledAI{"'"}s guardrails can be deployed 100% within
@@ -57,7 +57,7 @@ export default function Fidelity() {
                 confidentiality.
               </p>
               <p
-                className="max-w-md leading-5"
+                className="max-w-lg leading-5"
                 style={{ fontFamily: "Inter", fontWeight: 375 }}
               >
                 WalledAI also enables you to leverage third-party LLMs and AI
@@ -85,7 +85,7 @@ export default function Fidelity() {
             >
               Only AI Guardrail with <br /> Overarching{" "}
               <span
-                className="!ml-2 bg-clip-text text-transparent"
+                className="bg-clip-text text-transparent"
                 style={{
                   backgroundImage:
                     "linear-gradient(92.82deg, rgb(249, 60, 82) -56.34%, rgb(43, 33, 243) 130.6%)",
@@ -98,14 +98,14 @@ export default function Fidelity() {
             </h2>
             <div className="!space-y-5 !text-[1.125rem]">
               <p
-                className="max-w-md leading-5"
+                className="max-w-lg leading-5"
                 style={{ fontFamily: "Inter", fontWeight: 375 }}
               >
                 Your search for AI guardrails that accommodates specific
                 enterprise needs ends here.
               </p>
               <p
-                className="max-w-md leading-5"
+                className="max-w-lg leading-5"
                 style={{ fontFamily: "Inter", fontWeight: 375 }}
               >
                 Ensure compliance with company policies, build custom data
@@ -113,7 +113,7 @@ export default function Fidelity() {
                 tailored to your business needs.
               </p>
               <p
-                className="max-w-md leading-5"
+                className="max-w-lg leading-5"
                 style={{ fontFamily: "Inter", fontWeight: 375 }}
               >
                 <Link

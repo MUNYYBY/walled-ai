@@ -6,6 +6,23 @@
 
 @import "tailwindcss";
 
+@utility container {
+  padding-inline: 10px;
+  margin-inline: auto;
+
+  @variant sm {
+    padding-inline: 20px;
+  }
+
+  @variant lg {
+    padding-inline: 80px;
+  }
+
+  @variant xl {
+    max-width: 1450px !important;
+  }
+}
+
 .spin {
   animation: spin 1s linear infinite;
 }

@@ -63,18 +63,13 @@ export default function ProtectionProcess() {
             className="!text-[1.125rem] !text-[#E0DFEC]"
             style={{ fontFamily: "Inter", fontWeight: 300, lineHeight: "120%" }}
           >
-            WalledAI&apos;s guardrail solutions offer a one-stop solution to
-            ensure safe and <br className="hidden md:block" /> secure AI
-            operations in production.
+            WalledAI’s guardrail solutions offer a one-stop solution to ensure
+            safe and secure AI applications in production. Capitalize on a
+            complete ecosystem of AI guardrails, each catering to specific
+            challenges of AI in production
           </p>
-          <p
-            className="!text-[1.75rem] text-white"
-            style={{ fontWeight: 300, fontFamily: "Anek Devanagari" }}
-          >
-            Capitalize on a complete ecosystem of AI guardrails, each catering
-            to specific challenges of AI in production
-          </p>
-          <div className="mx-auto hidden space-y-3.5 text-center md:block">
+
+          <div className="mx-auto mt-5 hidden space-y-3.5 text-center md:block">
             <Image
               width={1000}
               height={700}

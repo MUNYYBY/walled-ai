@@ -33,7 +33,7 @@ export default function DeploymentGuardrails() {
               </h2>
             </div>
             <p
-              className="text-center !text-[1.125rem] leading-5"
+              className="text-center !text-[1rem] leading-5"
               style={{ fontFamily: "Inter", fontWeight: 400 }}
             >
               WalledAI further supports both collective and standalone

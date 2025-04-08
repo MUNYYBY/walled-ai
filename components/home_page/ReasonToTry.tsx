@@ -4,7 +4,7 @@ import React from "react";
 export default function ReasonToTry() {
   return (
     <section
-      className="relative bg-[#E0DEEC] !bg-cover !bg-center !bg-no-repeat py-20"
+      className="relative overflow-hidden bg-[#E0DEEC] !bg-cover !bg-center !bg-no-repeat py-20"
       style={{
         background: `url('/home_page/reason_to_try_bg.svg')`,
       }}
@@ -88,7 +88,7 @@ export default function ReasonToTry() {
           </div>
         </div>
         <Image
-          className="w-full"
+          className="!-mr-32 w-full"
           src={"/home_page/dashboard_preview.svg"}
           width={1500}
           height={1000}
