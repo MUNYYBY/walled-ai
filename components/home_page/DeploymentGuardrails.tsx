@@ -18,24 +18,25 @@ const DeploymentSwiper = () => {
   ];
 
   return (
-    <div className="relative w-full pb-16 lg:hidden">
+    <div className="relative w-[105.5%] lg:hidden">
       <Swiper
         modules={[Pagination]}
         spaceBetween={24}
         slidesPerView={1}
         onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
         pagination={{
-          el: ".swiper-pagination",
           clickable: true,
+          bulletClass: "custom-bullet-deploy",
+          bulletActiveClass: "custom-bullet-active",
           renderBullet: function (index, className) {
-            return `<span class="${className} ${index === activeIndex ? "active-bullet" : ""} w-2 h-2 rounded-full inline-block mx-1"></span>`;
+            return `<span class="${className}"></span>`;
           },
         }}
         className="swiper-deployment"
       >
         {deploymentImages.map((image, i) => (
           <SwiperSlide key={i}>
-            <div className="flex justify-center">
+            <div className="flex justify-center px-4 pb-10">
               <Image
                 src={image}
                 width={1050}
@@ -48,36 +49,35 @@ const DeploymentSwiper = () => {
         ))}
       </Swiper>
 
-      {/* Custom pagination - positioned absolutely */}
-      <div className="swiper-pagination absolute right-0 bottom-0 left-0 mt-8 flex items-center justify-center"></div>
-
       {/* Custom pagination styling */}
       <style jsx global>{`
+        .custom-bullet-deploy {
+          display: inline-block;
+          width: 15px;
+          height: 8px;
+          border-radius: 40%;
+          background: #c1c0d8;
+          margin: 0 4px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+
+        .custom-bullet-active {
+          background: linear-gradient(to right, #f93c52, #2b21f3);
+          width: 80px;
+          border-radius: 4px;
+        }
+
         .swiper-pagination {
           position: absolute;
-          bottom: 0;
+          bottom: 0px !important;
           left: 0;
           width: 100%;
           display: flex;
           justify-content: center;
           align-items: center;
-          margin-top: 20px;
+          z-index: 100 !important;
           padding-top: 20px;
-        }
-
-        .swiper-pagination-bullet {
-          background-color: #28273f;
-          width: 8px;
-          height: 8px;
-          opacity: 1;
-          transition: all 0.3s ease;
-          margin: 0 4px;
-        }
-
-        .swiper-pagination-bullet-active {
-          background: linear-gradient(to right, #f93c52, #2b21f3);
-          width: 40px;
-          border-radius: 4px;
         }
       `}</style>
     </div>
@@ -87,17 +87,21 @@ const DeploymentSwiper = () => {
 export default function DeploymentGuardrails() {
   return (
     <>
-      <section
-        className="flex flex-col items-center gap-10 bg-[#E0DEEC] !bg-cover !bg-no-repeat py-20"
-        style={{
-          background: `url('/home_page/deployment_bg.svg')`,
-        }}
-      >
-        <div className="container flex flex-col items-center gap-10">
+      <section className="relative flex flex-col items-center gap-10 bg-[#E0DEEC] !bg-cover !bg-no-repeat py-20">
+        <div className="absolute top-0 left-0 z-1 md:size-[50%]">
+          <Image
+            src="/home_page/deployment_bg-mobile.svg"
+            height={100}
+            width={100}
+            className="h-full w-full object-cover"
+            alt="bg"
+          />
+        </div>
+        <div className="relative z-10 container flex flex-col items-center gap-10">
           <div className="flex flex-col items-center">
             <div className="space-y-3.5">
               <h2
-                className="text-center !text-[2.75rem] -tracking-wide !text-[#323150]"
+                className="text-center !text-[2.35rem] -tracking-wide !text-[#323150] md:!text-[2.75rem]"
                 style={{ fontWeight: 400 }}
               >
                 <span
@@ -175,7 +179,7 @@ export default function DeploymentGuardrails() {
         <div className="container flex flex-col items-center gap-10">
           <div className="item-start flex flex-col !gap-[0.5rem] md:items-center">
             <h2
-              className="text-center !text-[2.75rem] -tracking-wide !text-[#EFEFF5]"
+              className="text-center !text-[2.35rem] -tracking-wide !text-[#EFEFF5] md:!text-[2.75rem]"
               style={{ fontWeight: 400, margin: 0 }}
             >
               <span

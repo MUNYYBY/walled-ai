@@ -12,7 +12,7 @@ export default function ReasonToTry() {
       <div className="container mx-auto flex flex-col items-center gap-[2.5rem] lg:flex-row">
         <div className="lg:!w-[40%] lg:!max-w-sm">
           <h2
-            className="!text-[2.75rem] -tracking-wider"
+            className="!text-[2.35rem] -tracking-wider md:!text-[2.75rem]"
             style={{ fontWeight: 400 }}
           >
             More Reasons <br /> to Try
@@ -61,6 +61,13 @@ export default function ReasonToTry() {
                   }}
                 />
               </div>
+              <Image
+                className="mt-3 block w-full md:!-mr-32 md:hidden"
+                src={"/home_page/dashboard_preview.svg"}
+                width={1500}
+                height={1000}
+                alt=""
+              />
             </div>
             <div className="group transition-all duration-500">
               <h3
@@ -88,7 +95,7 @@ export default function ReasonToTry() {
           </div>
         </div>
         <Image
-          className="!-mr-32 w-full"
+          className="hidden w-full md:!-mr-32 md:block"
           src={"/home_page/dashboard_preview.svg"}
           width={1500}
           height={1000}

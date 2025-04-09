@@ -1,8 +1,12 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
 
 const RESEARCH_DATA = [
   {
@@ -52,6 +56,71 @@ const RESEARCH_DATA = [
 // Double the research data array to create a seamless loop effect
 const DUPLICATED_RESEARCH = [...RESEARCH_DATA, ...RESEARCH_DATA];
 
+// Mobile Swiper for Research Insights
+const MobileResearchSwiper = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  return (
+    <div className="relative md:hidden">
+      <Swiper
+        modules={[Pagination]}
+        spaceBetween={24}
+        slidesPerView={1}
+        onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
+        pagination={{
+          clickable: true,
+          bulletClass: "custom-bullet-insights",
+          bulletActiveClass: "custom-bullet-active",
+          renderBullet: function (index, className) {
+            return `<span class="${className}"></span>`;
+          },
+        }}
+        className="swiper-insights"
+      >
+        {RESEARCH_DATA.map((research, index) => (
+          <SwiperSlide key={index}>
+            <div className="px-2 pb-10">
+              <ResearchCard {...research} />
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+
+      {/* Custom pagination styling */}
+      <style jsx global>{`
+        .custom-bullet-insights {
+          display: inline-block;
+          width: 15px;
+          height: 8px;
+          border-radius: 40%;
+          background: #c1c0d8;
+          margin: 0 4px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+
+        .custom-bullet-active {
+          background: linear-gradient(to right, #f93c52, #2b21f3);
+          width: 80px;
+          border-radius: 4px;
+        }
+
+        .swiper-pagination {
+          position: absolute;
+          bottom: 0px !important;
+          left: 0;
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 100 !important;
+          padding-top: 20px;
+        }
+      `}</style>
+    </div>
+  );
+};
+
 const ArrowIcon = () => (
   <svg
     width="18"
@@ -80,6 +149,8 @@ export default function InsightsOnResearch() {
 
   useEffect(() => {
     const scrollContainer = scrollContainerRef.current;
+    if (!scrollContainer) return;
+
     let animationFrameId: any;
     let scrollPosition = 0;
     const scrollSpeed = 1; // Adjust speed as needed
@@ -128,7 +199,7 @@ export default function InsightsOnResearch() {
       <div className="container mx-auto w-3/4 px-4">
         <div className="mb-12 flex flex-col items-center text-center">
           <h2
-            className="text-center !text-[2.75rem] -tracking-wide !text-[#323150]"
+            className="text-center !text-[2.35rem] -tracking-wide !text-[#323150] md:!text-[2.75rem]"
             style={{ fontWeight: 400, margin: 0 }}
           >
             Insights on{" "}
@@ -147,8 +218,11 @@ export default function InsightsOnResearch() {
         </div>
       </div>
 
-      {/* Carousel Container with Edge Gradients */}
-      <div className="relative !mt-3 w-full">
+      {/* Mobile Swiper (visible only on small screens) */}
+      <MobileResearchSwiper />
+
+      {/* Desktop Carousel with Continuous Scrolling (hidden on small screens) */}
+      <div className="relative !mt-3 hidden w-full md:block">
         {/* Left Gradient Fade */}
         <div className="absolute top-0 left-0 z-10 h-full w-24 bg-gradient-to-r from-[#E0DEEC]/70 to-transparent"></div>
 
@@ -201,7 +275,7 @@ const ResearchCard = ({
   avatar,
   description,
 }: any) => (
-  <div className="flex h-[25.5rem] max-w-fit flex-col overflow-hidden rounded-[1.75rem] bg-[#EFEFF5] p-1 transition-all 2xl:h-fit">
+  <div className="flex h-[25.5rem] max-w-fit flex-col overflow-hidden rounded-[1.75rem] bg-[#EFEFF5] p-1 transition-all hover:shadow-lg 2xl:h-fit">
     <div className="flex items-start justify-start gap-2 p-3 pb-1">
       <Image src={avatar} alt={name} width={60} height={185} className="" />
       <div className="flex flex-col gap-1">

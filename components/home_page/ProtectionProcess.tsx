@@ -13,25 +13,25 @@ const MobileSwiper = ({ processes }: any) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <div className="relative mt-8 pb-10 md:hidden">
-      {/* Added pb-16 for space below */}
+    <div className="relative mt-8 w-full md:hidden">
       <Swiper
         modules={[Pagination]}
         spaceBetween={24}
         slidesPerView={1}
         onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
         pagination={{
-          el: ".swiper-pagination",
           clickable: true,
+          bulletClass: "custom-bullet-process",
+          bulletActiveClass: "custom-bullet-active",
           renderBullet: function (index, className) {
-            return `<span class="${className} ${index === activeIndex ? "active-bullet" : ""} w-2 h-2 rounded-full inline-block mx-1"></span>`;
+            return `<span class="${className}"></span>`;
           },
         }}
         className="swiper-mobile"
       >
         {processes.map((process: any, i: number) => (
           <SwiperSlide key={i}>
-            <div className="flex flex-col gap-4 px-4">
+            <div className="flex flex-col gap-4 px-4 pb-20">
               <Image
                 src={process.image}
                 alt={process.title}
@@ -96,35 +96,36 @@ const MobileSwiper = ({ processes }: any) => {
           </SwiperSlide>
         ))}
       </Swiper>
-      {/* Custom pagination - positioned absolutely */}
-      <div className="swiper-pagination absolute right-0 bottom-0 left-0 mt-8 flex items-center justify-center"></div>
+
       {/* Custom pagination styling */}
       <style jsx global>{`
+        .custom-bullet-process {
+          display: inline-block;
+          width: 15px;
+          height: 8px;
+          border-radius: 35%;
+          background: #28273f;
+          margin: 0 4px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+
+        .custom-bullet-active {
+          background: linear-gradient(to right, #f93c52, #2b21f3);
+          width: 80px;
+          border-radius: 4px;
+        }
+
         .swiper-pagination {
           position: absolute;
-          bottom: 0;
+          bottom: 0px !important;
           left: 0;
           width: 100%;
           display: flex;
           justify-content: center;
           align-items: center;
-          margin-top: 20px;
+          z-index: 100 !important;
           padding-top: 20px;
-        }
-
-        .swiper-pagination-bullet {
-          background-color: #28273f;
-          width: 8px;
-          height: 8px;
-          opacity: 1;
-          transition: all 0.3s ease;
-          margin: 0 4px;
-        }
-
-        .swiper-pagination-bullet-active {
-          background: linear-gradient(to right, #f93c52, #2b21f3);
-          width: 80px;
-          border-radius: 4px;
         }
       `}</style>
     </div>
@@ -166,7 +167,7 @@ export default function ProtectionProcess() {
             className="mx-auto w-full space-y-3.5 text-center"
           >
             <h2
-              className="text-center !text-[38px] !text-[#EFEFF5] md:!text-[2.75rem]"
+              className="text-center !text-[2.25rem] !text-[#EFEFF5] md:!text-[2.75rem]"
               style={{
                 fontWeight: 400,
               }}

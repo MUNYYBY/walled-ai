@@ -1,8 +1,13 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 interface ResearchItem {
   image: string;
@@ -37,63 +42,86 @@ const RESEARCH_DATA: ResearchItem[] = [
   },
 ];
 
-// Double the research data array to create a seamless loop effect
-const DUPLICATED_RESEARCH = [...RESEARCH_DATA, ...RESEARCH_DATA];
+const SWIPER_BREAKPOINTS = {
+  640: { slidesPerView: 2 },
+  1024: { slidesPerView: 3 },
+  1920: { slidesPerView: 4 },
+  2048: { slidesPerView: 5 },
+  3500: { slidesPerView: 6 },
+};
 
-export default function ProprietaryResearch() {
-  const scrollContainerRef = useRef<any>(null);
+// Mobile Swiper for Research Data
+const MobileResearchSwiper = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  useEffect(() => {
-    const scrollContainer = scrollContainerRef.current;
-    let animationFrameId: any;
-    let scrollPosition = 0;
-    const scrollSpeed = 1; // Adjust speed as needed
+  return (
+    <div className="relative w-full md:hidden">
+      <Swiper
+        modules={[Pagination]}
+        spaceBetween={24}
+        slidesPerView={1}
+        onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
+        pagination={{
+          clickable: true,
+          bulletClass: "custom-bullet-research",
+          bulletActiveClass: "custom-bullet-active",
+          renderBullet: function (index, className) {
+            return `<span class="${className}"></span>`;
+          },
+        }}
+        className="swiper-research"
+      >
+        {RESEARCH_DATA.map((research, index) => (
+          <SwiperSlide key={index}>
+            <div className="px-2 pb-10">
+              <ResearchCard {...research} />
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
 
-    const scrollCarousel = () => {
-      if (scrollContainer) {
-        scrollPosition += scrollSpeed;
-
-        // When we've scrolled the width of the original set of items, reset to start
-        if (scrollPosition >= scrollContainer.scrollWidth / 2) {
-          scrollPosition = 0;
+      {/* Custom pagination styling */}
+      <style jsx global>{`
+        .custom-bullet-research {
+          display: inline-block;
+          width: 15px;
+          height: 8px;
+          border-radius: 40%;
+          background: #c1c0d8;
+          margin: 0 4px;
+          cursor: pointer;
+          transition: all 0.3s ease;
         }
 
-        scrollContainer.scrollLeft = scrollPosition;
-      }
-      animationFrameId = requestAnimationFrame(scrollCarousel);
-    };
+        .custom-bullet-active {
+          background: linear-gradient(to right, #f93c52, #2b21f3);
+          width: 80px;
+          border-radius: 4px;
+        }
 
-    // Start the animation
-    animationFrameId = requestAnimationFrame(scrollCarousel);
+        .swiper-pagination {
+          position: absolute;
+          bottom: 0px !important;
+          left: 0;
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 100 !important;
+          padding-top: 20px;
+        }
+      `}</style>
+    </div>
+  );
+};
 
-    // Pause animation when user hovers
-    const handleMouseEnter = () => {
-      cancelAnimationFrame(animationFrameId);
-    };
-
-    const handleMouseLeave = () => {
-      animationFrameId = requestAnimationFrame(scrollCarousel);
-    };
-
-    scrollContainer.addEventListener("mouseenter", handleMouseEnter);
-    scrollContainer.addEventListener("mouseleave", handleMouseLeave);
-
-    // Clean up
-    return () => {
-      cancelAnimationFrame(animationFrameId);
-      if (scrollContainer) {
-        scrollContainer.removeEventListener("mouseenter", handleMouseEnter);
-        scrollContainer.removeEventListener("mouseleave", handleMouseLeave);
-      }
-    };
-  }, []);
-
+export default function ProprietaryResearch() {
   return (
     <section className="bg-[#EEEEF4] py-20">
       <div className="container mx-auto w-3/4 px-4">
         <div className="mb-12 flex flex-col items-center text-center">
           <h2
-            className="text-center !text-[2.75rem] -tracking-wide !text-[#323150]"
+            className="text-center !text-[2.35rem] -tracking-wide !text-[#323150] md:!text-[2.75rem]"
             style={{ fontWeight: 400, margin: 0 }}
           >
             Powered by Years of Proprietary{" "}
@@ -129,56 +157,38 @@ export default function ProprietaryResearch() {
         </div>
       </div>
 
-      {/* Carousel Container with Edge Gradients */}
-      <div className="relative mt-3 w-full">
-        {/* Left Gradient Fade */}
-        {/* <div className="absolute top-0 left-0 z-10 h-full w-24 bg-gradient-to-r from-[#EEEEF4]/50 to-transparent"></div> */}
-
-        {/* Right Gradient Fade */}
-        {/* <div className="absolute top-0 right-0 z-10 h-full w-24 bg-gradient-to-l from-[#EEEEF4]/50 to-transparent"></div> */}
-
-        {/* Scrolling Container */}
-        <div
-          ref={scrollContainerRef}
-          className="scrollbar-hide flex overflow-x-auto"
-          style={{
-            scrollbarWidth: "none",
-            msOverflowStyle: "none",
-            WebkitOverflowScrolling: "touch",
+      {/* Desktop Swiper with Navigation (visible only on md and larger screens) */}
+      <div className="relative mx-auto hidden md:block">
+        <Swiper
+          modules={[Navigation]}
+          spaceBetween={24}
+          slidesPerView={1}
+          breakpoints={SWIPER_BREAKPOINTS}
+          navigation={{
+            nextEl: ".next",
+            prevEl: ".prev",
           }}
+          loop
+          className="px-2 py-4"
         >
-          <div className="flex gap-6 px-24">
-            {DUPLICATED_RESEARCH.map((research, index) => (
-              <div key={index} className="w-80 shrink-0">
-                <ResearchCard {...research} />
-              </div>
-            ))}
-          </div>
-        </div>
+          {RESEARCH_DATA.map((research, index) => (
+            <SwiperSlide key={index}>
+              <ResearchCard {...research} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
 
-      <div className="mx-2 !mt-8 flex h-10 items-center justify-center gap-3.5">
-        <Link
-          href={"#contactEmailSection"}
-          className="flex h-full w-full max-w-md items-center justify-center !rounded-[4px] border-[1.75px] border-[#A1A0C5] text-sm !text-[#323050] hover:bg-gray-100"
-          style={{
-            fontFamily: "Inter",
-            fontWeight: 400,
-            lineHeight: "120%",
-            letterSpacing: "-0.56px",
-          }}
-        >
-          <button className="">
-            Meet our research team <span className="!text-[12px]">{"🡢"}</span>
-          </button>
-        </Link>
-      </div>
+      <NavigationControls />
+
+      {/* Mobile Swiper (visible only on small screens) */}
+      <MobileResearchSwiper />
     </section>
   );
 }
 
 const ResearchCard = ({ image, title, description }: ResearchItem) => (
-  <div className="flex h-96 max-w-fit flex-col overflow-hidden rounded-[1.75rem] bg-[#E0DEEC] p-1 transition-all 2xl:h-fit">
+  <div className="flex h-96 max-w-fit flex-col overflow-hidden rounded-[1.75rem] bg-[#E0DEEC] p-1 transition-all hover:shadow-lg 2xl:h-fit">
     <div className="relative aspect-video w-full">
       <Image
         src={image}
@@ -239,9 +249,21 @@ const ResearchCard = ({ image, title, description }: ResearchItem) => (
   </div>
 );
 
-// Add this to your CSS file or in a style tag in your document head
-const scrollbarHideStyles = `
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
-`;
+const NavigationControls = () => (
+  <div className="mx-2 mb-4 flex h-10 items-center justify-center gap-3.5 md:mt-4 md:mb-0">
+    <Link
+      href={"#contactEmailSection"}
+      className="flex h-full w-full max-w-md items-center justify-center !rounded-[4px] border-[1.75px] border-[#A1A0C5] text-sm !text-[#323050] hover:bg-gray-100"
+      style={{
+        fontFamily: "Inter",
+        fontWeight: 400,
+        lineHeight: "120%",
+        letterSpacing: "-0.56px",
+      }}
+    >
+      <button className="">
+        Meet our research team <span className="!text-[12px]">{"🡢"}</span>
+      </button>
+    </Link>
+  </div>
+);
