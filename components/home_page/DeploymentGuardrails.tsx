@@ -1,6 +1,88 @@
+"use client";
 import Image from "next/image";
-import SectionTitle from "../common/SectionTitile";
 import Link from "next/link";
+import React, { useState, useEffect } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
+
+// Mobile Swiper component for deployment images
+const DeploymentSwiper = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const deploymentImages = [
+    "/home_page/deployments/deploy-1.svg",
+    "/home_page/deployments/deploy-2.svg",
+    "/home_page/deployments/deploy-3.svg",
+  ];
+
+  return (
+    <div className="relative w-full pb-16 lg:hidden">
+      <Swiper
+        modules={[Pagination]}
+        spaceBetween={24}
+        slidesPerView={1}
+        onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
+        pagination={{
+          el: ".swiper-pagination",
+          clickable: true,
+          renderBullet: function (index, className) {
+            return `<span class="${className} ${index === activeIndex ? "active-bullet" : ""} w-2 h-2 rounded-full inline-block mx-1"></span>`;
+          },
+        }}
+        className="swiper-deployment"
+      >
+        {deploymentImages.map((image, i) => (
+          <SwiperSlide key={i}>
+            <div className="flex justify-center">
+              <Image
+                src={image}
+                width={1050}
+                height={450}
+                alt={`Deployment option ${i + 1}`}
+                className="w-full"
+              />
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+
+      {/* Custom pagination - positioned absolutely */}
+      <div className="swiper-pagination absolute right-0 bottom-0 left-0 mt-8 flex items-center justify-center"></div>
+
+      {/* Custom pagination styling */}
+      <style jsx global>{`
+        .swiper-pagination {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-top: 20px;
+          padding-top: 20px;
+        }
+
+        .swiper-pagination-bullet {
+          background-color: #28273f;
+          width: 8px;
+          height: 8px;
+          opacity: 1;
+          transition: all 0.3s ease;
+          margin: 0 4px;
+        }
+
+        .swiper-pagination-bullet-active {
+          background: linear-gradient(to right, #f93c52, #2b21f3);
+          width: 40px;
+          border-radius: 4px;
+        }
+      `}</style>
+    </div>
+  );
+};
 
 export default function DeploymentGuardrails() {
   return (
@@ -44,26 +126,32 @@ export default function DeploymentGuardrails() {
               control.
             </p>
           </div>
-          <div className="flex flex-col items-center justify-center gap-4 lg:flex-row">
+
+          {/* Mobile Swiper for small screens (hidden on lg and up) */}
+          <DeploymentSwiper />
+
+          {/* Desktop layout for lg screens and up (hidden on smaller screens) */}
+          <div className="hidden flex-row items-center justify-center gap-4 lg:flex">
             <Image
               src={"/home_page/deployments/deploy-1.svg"}
               width={1050}
               height={450}
-              alt=""
+              alt="Deployment option 1"
             />
             <Image
               src={"/home_page/deployments/deploy-2.svg"}
               width={1050}
               height={450}
-              alt=""
+              alt="Deployment option 2"
             />
             <Image
               src={"/home_page/deployments/deploy-3.svg"}
               width={1050}
               height={450}
-              alt=""
+              alt="Deployment option 3"
             />
           </div>
+
           <p
             className="text-center !text-[1.125rem]"
             style={{ fontFamily: "Inter", fontWeight: 375 }}
@@ -157,7 +245,7 @@ export default function DeploymentGuardrails() {
                   style={{ background: _.color }}
                 />
                 <span
-                  className="pt-2 !text-[#EFEFF5]"
+                  className="pt-2 !text-[10px] !text-[#EFEFF5] md:!text-base"
                   style={{ fontWeight: 300 }}
                 >
                   {_.label}
