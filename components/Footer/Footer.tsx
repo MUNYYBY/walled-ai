@@ -5,6 +5,7 @@ import footer_sections from "./partial/sections";
 import axios from "axios";
 import baseUrl from "@/utils/baseUrl";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 interface SocialIcon {
   src: string;
@@ -35,6 +36,10 @@ export default function Footer() {
   const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
   const [responseMessage, setResponseMessage] = useState<string | null>(null);
   const [isError, setIsError] = useState<boolean>(false);
+
+  //** router */
+  const pathname = usePathname();
+
   useEffect(() => {
     // Load reCAPTCHA script dynamically
     const script = document.createElement("script");
@@ -129,11 +134,12 @@ export default function Footer() {
       </div>
       <div className="relative z-10 container !space-y-5">
         {/* CTA Section */}
-        <div className="!space-y-1 py-3.5 text-center">
+        <div className="flex flex-col items-center justify-center !space-y-1 py-3.5 text-center">
           <h2
             className="!text-[2.15rem] md:!text-[2.75rem]"
             style={{ fontWeight: 400 }}
           >
+            {pathname === "/about-us" ? "Lets's" : ""}
             <span
               className="bg-clip-text px-1.5 text-transparent"
               style={{
@@ -143,12 +149,14 @@ export default function Footer() {
                 WebkitTextFillColor: "transparent",
               }}
             >
-              Get Started
+              {pathname === "/about-us" ? "Build" : "Get Started"}
             </span>
-            Without Serious Commitments
+            {pathname === "/about-us"
+              ? "Better AI?"
+              : "Without Serious Commitments"}
           </h2>
           <p
-            className="text-center text-sm sm:text-base"
+            className="w-full max-w-lg text-center text-sm sm:text-base"
             style={{
               color: "#323150",
               fontFamily: "Inter",
@@ -157,8 +165,14 @@ export default function Footer() {
               letterSpacing: "-0.72px",
             }}
           >
-            Try out WalledAI&apos;s capabilities today <br /> with our free
-            trial for first-time customers.
+            {pathname === "/about-us" ? (
+              "If WalledAI aligns with your values, get in touch to discuss potential partnerships and path-breaking AI security solutions for your business."
+            ) : (
+              <>
+                Try out WalledAI&apos;s capabilities today <br /> with our free
+                trial for first-time customers.
+              </>
+            )}
           </p>
         </div>
         {contacted ? (

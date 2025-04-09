@@ -65,10 +65,10 @@ const ArrowIcon = () => (
 export default function Team() {
   return (
     <section className="bg-[#EFEFF5] py-20">
-      <div className="container mx-auto w-3/4 px-4">
+      <div className="container mx-auto md:w-3/4">
         <div className="mb-12 flex flex-col items-center text-center">
           <h2
-            className="text-center !text-[2.75rem] -tracking-wide !text-[#323150]"
+            className="text-center !text-[2.15rem] -tracking-wide !text-[#323150] md:!text-[2.75rem]"
             style={{ fontWeight: 400, margin: 0 }}
           >
             Meet the{" "}

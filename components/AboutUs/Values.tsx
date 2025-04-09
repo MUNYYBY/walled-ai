@@ -13,7 +13,7 @@ export default function Values() {
         <div className="container flex flex-col items-center gap-10">
           <div className="item-start flex flex-col !gap-[0.5rem] md:items-center">
             <h2
-              className="text-center !text-[2.75rem] -tracking-wide !text-[#EFEFF5]"
+              className="text-center !text-[2.35rem] -tracking-wide !text-[#EFEFF5] md:!text-[2.75rem]"
               style={{ fontWeight: 400, margin: 0 }}
             >
               <span

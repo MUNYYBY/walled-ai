@@ -7,7 +7,7 @@ export default function LifeAtWalledAI() {
     <>
       <section className="overflow-hidden bg-[#E0DFEC] !bg-cover !bg-center !bg-no-repeat py-20">
         <div className="relative container mx-auto flex flex-col items-center gap-10 md:flex-row md:justify-center md:gap-20">
-          <div className="relative md:w-1/2">
+          <div className="relative hidden md:block md:w-1/2">
             <Image
               className="w-full"
               src="/about-us/life.png"
@@ -34,6 +34,15 @@ export default function LifeAtWalledAI() {
               </span>
               at WalledAI
             </h2>
+            <div className="relative block pb-5 md:hidden md:w-1/2">
+              <Image
+                className="w-full"
+                src="/about-us/life.png"
+                width={500}
+                height={450}
+                alt="Fidelity Chat"
+              />
+            </div>
             <div className="!space-y-5 !text-[1.125rem]">
               <p
                 className="max-w-md leading-5"
