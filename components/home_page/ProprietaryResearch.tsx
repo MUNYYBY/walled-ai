@@ -1,11 +1,7 @@
 "use client";
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
+import React, { useEffect, useRef } from "react";
 import Image from "next/image";
-import SectionTitle from "../common/SectionTitile";
 import Link from "next/link";
 
 interface ResearchItem {
@@ -41,38 +37,57 @@ const RESEARCH_DATA: ResearchItem[] = [
   },
 ];
 
-const SWIPER_BREAKPOINTS = {
-  640: { slidesPerView: 2 },
-  1024: { slidesPerView: 3 },
-  1920: { slidesPerView: 4 },
-  2048: { slidesPerView: 5 },
-  3500: { slidesPerView: 6 },
-};
-
-const ArrowIcon = () => (
-  <svg
-    width="18"
-    height="18"
-    viewBox="0 0 18 18"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M3.42065 9.79517L13.9207 9.79517"
-      stroke="#323150"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M11.6702 7.54565L13.9202 9.79565L11.6702 12.0457"
-      stroke="#323150"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-);
+// Double the research data array to create a seamless loop effect
+const DUPLICATED_RESEARCH = [...RESEARCH_DATA, ...RESEARCH_DATA];
 
 export default function ProprietaryResearch() {
+  const scrollContainerRef = useRef<any>(null);
+
+  useEffect(() => {
+    const scrollContainer = scrollContainerRef.current;
+    let animationFrameId: any;
+    let scrollPosition = 0;
+    const scrollSpeed = 1; // Adjust speed as needed
+
+    const scrollCarousel = () => {
+      if (scrollContainer) {
+        scrollPosition += scrollSpeed;
+
+        // When we've scrolled the width of the original set of items, reset to start
+        if (scrollPosition >= scrollContainer.scrollWidth / 2) {
+          scrollPosition = 0;
+        }
+
+        scrollContainer.scrollLeft = scrollPosition;
+      }
+      animationFrameId = requestAnimationFrame(scrollCarousel);
+    };
+
+    // Start the animation
+    animationFrameId = requestAnimationFrame(scrollCarousel);
+
+    // Pause animation when user hovers
+    const handleMouseEnter = () => {
+      cancelAnimationFrame(animationFrameId);
+    };
+
+    const handleMouseLeave = () => {
+      animationFrameId = requestAnimationFrame(scrollCarousel);
+    };
+
+    scrollContainer.addEventListener("mouseenter", handleMouseEnter);
+    scrollContainer.addEventListener("mouseleave", handleMouseLeave);
+
+    // Clean up
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      if (scrollContainer) {
+        scrollContainer.removeEventListener("mouseenter", handleMouseEnter);
+        scrollContainer.removeEventListener("mouseleave", handleMouseLeave);
+      }
+    };
+  }, []);
+
   return (
     <section className="bg-[#EEEEF4] py-20">
       <div className="container mx-auto w-3/4 px-4">
@@ -107,51 +122,63 @@ export default function ProprietaryResearch() {
             className="!text-[1.125rem]"
           >
             WalledAI is grounded in years of proprietary research on AI systems
-            and associated metrics like <br /> safety, security, and
-            reliability.
-          </p>
-          <p
-            className="max-w-6xl !text-[1.5rem]"
-            style={{
-              fontWeight: 400,
-              fontFamily: "Anek Devanagari",
-              lineHeight: "120%",
-            }}
-          >
-            Count upon guardrails driven by systematic academic research to{" "}
-            <br />
-            streamline and secure AI systems.
+            and associated metrics like safety, security, and reliability. Count
+            upon guardrails driven by systematic academic research to streamline
+            and secure AI systems.
           </p>
         </div>
       </div>
-      <div className="relative mx-auto">
-        <Swiper
-          modules={[Navigation]}
-          spaceBetween={24}
-          slidesPerView={1}
-          breakpoints={SWIPER_BREAKPOINTS}
-          navigation={{
-            nextEl: ".next",
-            prevEl: ".prev",
-          }}
-          loop
-          className="px-2 py-4"
-        >
-          {RESEARCH_DATA.map((research, index) => (
-            <SwiperSlide key={index}>
-              <ResearchCard {...research} />
-            </SwiperSlide>
-          ))}
-        </Swiper>
 
-        <NavigationControls />
+      {/* Carousel Container with Edge Gradients */}
+      <div className="relative mt-3 w-full">
+        {/* Left Gradient Fade */}
+        {/* <div className="absolute top-0 left-0 z-10 h-full w-24 bg-gradient-to-r from-[#EEEEF4]/50 to-transparent"></div> */}
+
+        {/* Right Gradient Fade */}
+        {/* <div className="absolute top-0 right-0 z-10 h-full w-24 bg-gradient-to-l from-[#EEEEF4]/50 to-transparent"></div> */}
+
+        {/* Scrolling Container */}
+        <div
+          ref={scrollContainerRef}
+          className="scrollbar-hide flex overflow-x-auto"
+          style={{
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+            WebkitOverflowScrolling: "touch",
+          }}
+        >
+          <div className="flex gap-6 px-24">
+            {DUPLICATED_RESEARCH.map((research, index) => (
+              <div key={index} className="w-80 shrink-0">
+                <ResearchCard {...research} />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="mx-2 !mt-8 flex h-10 items-center justify-center gap-3.5">
+        <Link
+          href={"#contactEmailSection"}
+          className="flex h-full w-full max-w-md items-center justify-center !rounded-[4px] border-[1.75px] border-[#A1A0C5] text-sm !text-[#323050] hover:bg-gray-100"
+          style={{
+            fontFamily: "Inter",
+            fontWeight: 400,
+            lineHeight: "120%",
+            letterSpacing: "-0.56px",
+          }}
+        >
+          <button className="">
+            Meet our research team <span className="!text-[12px]">{"🡢"}</span>
+          </button>
+        </Link>
       </div>
     </section>
   );
 }
 
 const ResearchCard = ({ image, title, description }: ResearchItem) => (
-  <div className="flex h-96 max-w-fit flex-col overflow-hidden rounded-[1.75rem] bg-[#E0DEEC] p-1 transition-all hover:shadow-lg 2xl:h-fit">
+  <div className="flex h-96 max-w-fit flex-col overflow-hidden rounded-[1.75rem] bg-[#E0DEEC] p-1 transition-all 2xl:h-fit">
     <div className="relative aspect-video w-full">
       <Image
         src={image}
@@ -197,14 +224,14 @@ const ResearchCard = ({ image, title, description }: ResearchItem) => (
           <path
             d="M5.2876 5.2876L12.7122 12.7122"
             stroke="#323150"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             d="M12.7124 9.53027V12.7123H9.53042"
             stroke="#323150"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </svg>
       </div>
@@ -212,33 +239,9 @@ const ResearchCard = ({ image, title, description }: ResearchItem) => (
   </div>
 );
 
-const NavigationControls = () => (
-  <div className="mx-2 mt-4 flex h-10 items-center justify-center gap-3.5">
-    <button
-      className="prev z-10 flex h-full rotate-180 items-center justify-center !rounded-sm border-[1.75px] border-[#A1A0C5] p-2.5 transition-all hover:bg-gray-100"
-      aria-label="Previous slide"
-    >
-      <ArrowIcon />
-    </button>
-    <Link
-      href={"#contactEmailSection"}
-      className="flex h-full w-full max-w-md items-center justify-center !rounded-[4px] border-[1.75px] border-[#A1A0C5] text-sm !text-[#323050] hover:bg-gray-100"
-      style={{
-        fontFamily: "Inter",
-        fontWeight: 400,
-        lineHeight: "120%",
-        letterSpacing: "-0.56px",
-      }}
-    >
-      <button className="">
-        Meet our research team <span className="!text-[12px]">{"🡢"}</span>
-      </button>
-    </Link>
-    <button
-      className="next z-10 flex h-full items-center justify-center !rounded-sm border-[1.75px] border-[#A1A0C5] p-2.5 transition-all hover:bg-gray-100"
-      aria-label="Next slide"
-    >
-      <ArrowIcon />
-    </button>
-  </div>
-);
+// Add this to your CSS file or in a style tag in your document head
+const scrollbarHideStyles = `
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+`;

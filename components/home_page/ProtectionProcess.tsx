@@ -1,9 +1,135 @@
 "use client";
 import Image from "next/image";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
 
+// Swiper component for mobile devices
+const MobileSwiper = ({ processes }: any) => {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  return (
+    <div className="relative mt-8 pb-10 md:hidden">
+      {/* Added pb-16 for space below */}
+      <Swiper
+        modules={[Pagination]}
+        spaceBetween={24}
+        slidesPerView={1}
+        onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
+        pagination={{
+          el: ".swiper-pagination",
+          clickable: true,
+          renderBullet: function (index, className) {
+            return `<span class="${className} ${index === activeIndex ? "active-bullet" : ""} w-2 h-2 rounded-full inline-block mx-1"></span>`;
+          },
+        }}
+        className="swiper-mobile"
+      >
+        {processes.map((process: any, i: number) => (
+          <SwiperSlide key={i}>
+            <div className="flex flex-col gap-4 px-4">
+              <Image
+                src={process.image}
+                alt={process.title}
+                height={100}
+                width={100}
+                className="block w-full"
+              />
+              <motion.div
+                className="group relative rounded-xl bg-[#28273F] px-3 py-3 text-white transition-all duration-300"
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  delay: i * 0.2,
+                  duration: 0.8,
+                  ease: "easeOut",
+                }}
+              >
+                <div className="relative flex min-h-32 flex-col space-y-4">
+                  <Link
+                    className="absolute top-0 right-0 flex rotate-0 items-center justify-center gap-2.5 rounded-full !bg-gradient-to-r !from-[#F93C52] !to-[#2B21F3] p-2 transition-all duration-300"
+                    href={process.link}
+                  >
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 18 18"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M3.42065 9.79517L13.9207 9.79517"
+                        stroke="#EFEFF5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M11.6702 7.54565L13.9202 9.79565L11.6702 12.0457"
+                        stroke="#EFEFF5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </Link>
+                  <h3
+                    className="text-left !text-xl font-medium !text-white transition-all duration-300"
+                    style={{
+                      fontFamily: "Inter",
+                      fontWeight: 600,
+                    }}
+                  >
+                    {process.title}
+                  </h3>
+                  <p
+                    className="text-left !text-sm !text-white transition-all duration-300"
+                    style={{ fontFamily: "Inter", fontWeight: 300 }}
+                  >
+                    {process.description}
+                  </p>
+                </div>
+              </motion.div>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+      {/* Custom pagination - positioned absolutely */}
+      <div className="swiper-pagination absolute right-0 bottom-0 left-0 mt-8 flex items-center justify-center"></div>
+      {/* Custom pagination styling */}
+      <style jsx global>{`
+        .swiper-pagination {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-top: 20px;
+          padding-top: 20px;
+        }
+
+        .swiper-pagination-bullet {
+          background-color: #28273f;
+          width: 8px;
+          height: 8px;
+          opacity: 1;
+          transition: all 0.3s ease;
+          margin: 0 4px;
+        }
+
+        .swiper-pagination-bullet-active {
+          background: linear-gradient(to right, #f93c52, #2b21f3);
+          width: 80px;
+          border-radius: 4px;
+        }
+      `}</style>
+    </div>
+  );
+};
 export default function ProtectionProcess() {
   const processes = [
     {
@@ -30,150 +156,130 @@ export default function ProtectionProcess() {
   ];
 
   return (
-    <section className="relative container mx-auto px-4 py-20">
-      <div className="z-[1] flex items-center justify-center">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="mx-auto w-full space-y-3.5 text-center"
-        >
-          <h2
-            className="text-center !text-[38px] !text-[#EFEFF5] md:!text-[2.75rem]"
-            style={{
-              fontWeight: 400,
-            }}
+    <>
+      <section className="relative container mx-auto px-4 pt-20">
+        <div className="z-[1] flex items-center justify-center">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="mx-auto w-full space-y-3.5 text-center"
           >
-            Complete
-            <span
-              className="bg-clip-text px-1.5 text-transparent"
+            <h2
+              className="text-center !text-[38px] !text-[#EFEFF5] md:!text-[2.75rem]"
               style={{
-                backgroundImage:
-                  "linear-gradient(92.82deg, rgb(249, 60, 82) -56.34%, rgb(43, 33, 243) 130.6%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
+                fontWeight: 400,
               }}
             >
-              Protection
-            </span>
-            <br className="block md:hidden" />
-            for AI in Production
-          </h2>
-          <p
-            className="!text-[1.125rem] !text-[#E0DFEC]"
-            style={{ fontFamily: "Inter", fontWeight: 300, lineHeight: "120%" }}
-          >
-            WalledAI’s guardrail solutions offer a one-stop solution to ensure
-            safe and secure AI applications in production. Capitalize on a
-            complete ecosystem of AI guardrails, each catering to specific
-            challenges of AI in production
-          </p>
+              Complete
+              <span
+                className="bg-clip-text px-1.5 text-transparent"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(92.82deg, rgb(249, 60, 82) -56.34%, rgb(43, 33, 243) 130.6%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
+              >
+                Protection
+              </span>
+              <br className="block md:hidden" />
+              for AI in Production
+            </h2>
+            <p
+              className="!text-[1.125rem] !text-[#E0DFEC]"
+              style={{
+                fontFamily: "Inter",
+                fontWeight: 300,
+                lineHeight: "120%",
+              }}
+            >
+              WalledAI{"'"}s guardrail solutions offer a one-stop solution to
+              ensure safe and secure AI applications in production. Capitalize
+              on a complete ecosystem of AI guardrails, each catering to
+              specific challenges of AI in production
+            </p>
 
-          <div className="mx-auto mt-5 hidden space-y-3.5 text-center md:block">
-            <Image
-              width={1000}
-              height={700}
-              src="/home_page/protection_process.svg"
-              alt="AI Protection Diagram"
-              className="w-full max-w-full"
-            />
-          </div>
-          <div className="mx-auto grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-10">
-            {processes.map((process, i) => (
-              <div key={i} className="flex flex-col gap-4">
-                <Image
-                  src={process.image}
-                  alt={process.title}
-                  height={100}
-                  width={100}
-                  className="block w-full md:hidden"
-                />
-                <motion.div
-                  className="group relative rounded-xl bg-[#28273F] px-3 py-3 text-white transition-all duration-300 md:bg-transparent"
-                  initial={{ opacity: 0, y: 50 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    delay: i * 0.2,
-                    duration: 0.8,
-                    ease: "easeOut",
-                  }}
-                >
-                  <div className="relative flex min-h-32 flex-col space-y-4 md:min-h-36">
-                    <Link
-                      className="absolute top-0 right-0 hidden rotate-45 items-center justify-center gap-2.5 rounded-full !bg-[#4F4E7E] p-2 transition-all duration-300 group-hover:rotate-0 group-hover:bg-gradient-to-r group-hover:from-[#F93C52] group-hover:to-[#2B21F3] md:flex"
-                      href={process.link}
-                    >
-                      <svg
-                        width="18"
-                        height="18"
-                        viewBox="0 0 18 18"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
+            <div className="mx-auto mt-5 hidden space-y-3.5 text-center md:block">
+              <Image
+                width={1000}
+                height={700}
+                src="/home_page/protection_process.svg"
+                alt="AI Protection Diagram"
+                className="w-full max-w-full"
+              />
+            </div>
+
+            {/* Desktop version */}
+            <div className="mx-auto hidden grid-cols-1 gap-6 md:grid md:grid-cols-3 md:gap-10">
+              {processes.map((process, i) => (
+                <div key={i} className="flex flex-col gap-4">
+                  <motion.div
+                    className="group relative rounded-xl bg-transparent px-3 py-3 text-white transition-all duration-300"
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      delay: i * 0.2,
+                      duration: 0.8,
+                      ease: "easeOut",
+                    }}
+                  >
+                    <div className="relative flex min-h-36 flex-col space-y-4">
+                      <Link
+                        className="absolute top-0 right-0 flex rotate-45 items-center justify-center gap-2.5 rounded-full !bg-[#4F4E7E] p-2 transition-all duration-300 group-hover:rotate-0 group-hover:bg-gradient-to-r group-hover:from-[#F93C52] group-hover:to-[#2B21F3]"
+                        href={process.link}
                       >
-                        <path
-                          d="M3.42065 9.79517L13.9207 9.79517"
-                          stroke="#EFEFF5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <path
-                          d="M11.6702 7.54565L13.9202 9.79565L11.6702 12.0457"
-                          stroke="#EFEFF5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </Link>
-                    <Link
-                      className="absolute top-0 right-0 flex rotate-0 items-center justify-center gap-2.5 rounded-full !bg-gradient-to-r !from-[#F93C52] !to-[#2B21F3] p-2 transition-all duration-300 md:hidden md:rotate-45 md:!bg-[#4F4E7E] md:group-hover:rotate-0 md:group-hover:bg-gradient-to-r md:group-hover:from-[#F93C52] md:group-hover:to-[#2B21F3]"
-                      href={process.link}
-                    >
-                      <svg
-                        width="18"
-                        height="18"
-                        viewBox="0 0 18 18"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
+                        <svg
+                          width="18"
+                          height="18"
+                          viewBox="0 0 18 18"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M3.42065 9.79517L13.9207 9.79517"
+                            stroke="#EFEFF5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                          <path
+                            d="M11.6702 7.54565L13.9202 9.79565L11.6702 12.0457"
+                            stroke="#EFEFF5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </Link>
+                      <h3
+                        className="text-left !text-2xl font-medium !text-[#4F4E7E] transition-all duration-300 group-hover:!text-white"
+                        style={{
+                          fontFamily: "Inter",
+                          fontWeight: 600,
+                        }}
                       >
-                        <path
-                          d="M3.42065 9.79517L13.9207 9.79517"
-                          stroke="#EFEFF5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <path
-                          d="M11.6702 7.54565L13.9202 9.79565L11.6702 12.0457"
-                          stroke="#EFEFF5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </Link>
-                    <h3
-                      className="text-left !text-xl font-medium !text-white transition-all duration-300 md:!text-2xl md:!text-[#4F4E7E] md:group-hover:!text-white"
-                      style={{
-                        fontFamily: "Inter",
-                        fontWeight: 600,
-                      }}
-                    >
-                      {process.title}
-                    </h3>
-                    <p
-                      className="text-left !text-sm !text-white transition-all duration-300 md:!text-[0.925rem] md:!text-[#4F4E7E] md:group-hover:!text-white"
-                      style={{ fontFamily: "Inter", fontWeight: 300 }}
-                    >
-                      {process.description}
-                    </p>
-                  </div>
-                  <motion.div className="relative hidden h-1 w-full overflow-hidden rounded-full bg-[#28273F] md:block">
-                    <motion.div className="absolute top-0 left-0 h-full w-full rounded-full bg-gradient-to-r from-[#F93C52] to-[#2B21F3] transition-all duration-300 md:w-0 md:group-hover:w-full" />
+                        {process.title}
+                      </h3>
+                      <p
+                        className="text-left !text-[0.925rem] !text-[#4F4E7E] transition-all duration-300 group-hover:!text-white"
+                        style={{ fontFamily: "Inter", fontWeight: 300 }}
+                      >
+                        {process.description}
+                      </p>
+                    </div>
+                    <motion.div className="relative h-1 w-full overflow-hidden rounded-full bg-[#28273F]">
+                      <motion.div className="absolute top-0 left-0 h-full w-0 rounded-full bg-gradient-to-r from-[#F93C52] to-[#2B21F3] transition-all duration-300 group-hover:w-full" />
+                    </motion.div>
                   </motion.div>
-                </motion.div>
-              </div>
-            ))}
-          </div>
-        </motion.div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+      <div className="pt-5 pb-20">
+        {/* Mobile swiper */}
+        <MobileSwiper processes={processes} />
       </div>
-    </section>
+    </>
   );
 }

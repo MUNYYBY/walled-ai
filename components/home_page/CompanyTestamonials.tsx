@@ -107,7 +107,7 @@ export default function CompanyTestimonials() {
             , You{"'"}re in Good Company
           </h2>
           <p
-            className="text-center leading-5 !text-[#EFEFF5]"
+            className="max-w-[30rem] text-center leading-5 !text-[#EFEFF5]"
             style={{ fontFamily: "Inter", fontWeight: 300, margin: 0 }}
           >
             Join a growing club of industry leaders who trust WalledCorrect to

@@ -1,11 +1,7 @@
 "use client";
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
+import React, { useEffect, useRef } from "react";
 import Image from "next/image";
-import SectionTitle from "../common/SectionTitile";
 import Link from "next/link";
 
 const RESEARCH_DATA = [
@@ -53,13 +49,8 @@ const RESEARCH_DATA = [
   },
 ];
 
-const SWIPER_BREAKPOINTS = {
-  640: { slidesPerView: 2 },
-  1024: { slidesPerView: 3 },
-  1920: { slidesPerView: 4 },
-  2048: { slidesPerView: 5 },
-  3500: { slidesPerView: 6 },
-};
+// Double the research data array to create a seamless loop effect
+const DUPLICATED_RESEARCH = [...RESEARCH_DATA, ...RESEARCH_DATA];
 
 const ArrowIcon = () => (
   <svg
@@ -85,6 +76,53 @@ const ArrowIcon = () => (
 );
 
 export default function InsightsOnResearch() {
+  const scrollContainerRef = useRef<any>(null);
+
+  useEffect(() => {
+    const scrollContainer = scrollContainerRef.current;
+    let animationFrameId: any;
+    let scrollPosition = 0;
+    const scrollSpeed = 1; // Adjust speed as needed
+
+    const scrollCarousel = () => {
+      if (scrollContainer) {
+        scrollPosition += scrollSpeed;
+
+        // When we've scrolled the width of the original set of items, reset to start
+        if (scrollPosition >= scrollContainer.scrollWidth / 2) {
+          scrollPosition = 0;
+        }
+
+        scrollContainer.scrollLeft = scrollPosition;
+      }
+      animationFrameId = requestAnimationFrame(scrollCarousel);
+    };
+
+    // Start the animation
+    animationFrameId = requestAnimationFrame(scrollCarousel);
+
+    // Pause animation when user hovers
+    const handleMouseEnter = () => {
+      cancelAnimationFrame(animationFrameId);
+    };
+
+    const handleMouseLeave = () => {
+      animationFrameId = requestAnimationFrame(scrollCarousel);
+    };
+
+    scrollContainer.addEventListener("mouseenter", handleMouseEnter);
+    scrollContainer.addEventListener("mouseleave", handleMouseLeave);
+
+    // Clean up
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      if (scrollContainer) {
+        scrollContainer.removeEventListener("mouseenter", handleMouseEnter);
+        scrollContainer.removeEventListener("mouseleave", handleMouseLeave);
+      }
+    };
+  }, []);
+
   return (
     <section className="bg-[#E0DEEC] py-20">
       <div className="container mx-auto w-3/4 px-4">
@@ -108,27 +146,49 @@ export default function InsightsOnResearch() {
           </h2>
         </div>
       </div>
-      <div className="relative mx-auto">
-        <Swiper
-          modules={[Navigation]}
-          spaceBetween={24}
-          slidesPerView={1}
-          breakpoints={SWIPER_BREAKPOINTS}
-          navigation={{
-            nextEl: ".next",
-            prevEl: ".prev",
-          }}
-          loop
-          className="px-2 py-4"
-        >
-          {RESEARCH_DATA.map((research, index) => (
-            <SwiperSlide key={index}>
-              <ResearchCard {...research} />
-            </SwiperSlide>
-          ))}
-        </Swiper>
 
-        <NavigationControls />
+      {/* Carousel Container with Edge Gradients */}
+      <div className="relative !mt-3 w-full">
+        {/* Left Gradient Fade */}
+        <div className="absolute top-0 left-0 z-10 h-full w-24 bg-gradient-to-r from-[#E0DEEC]/70 to-transparent"></div>
+
+        {/* Right Gradient Fade */}
+        <div className="absolute top-0 right-0 z-10 h-full w-24 bg-gradient-to-l from-[#E0DEEC]/70 to-transparent"></div>
+
+        {/* Scrolling Container */}
+        <div
+          ref={scrollContainerRef}
+          className="scrollbar-hide flex overflow-x-auto"
+          style={{
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+            WebkitOverflowScrolling: "touch",
+          }}
+        >
+          <div className="flex gap-6 px-24">
+            {DUPLICATED_RESEARCH.map((research, index) => (
+              <div key={index} className="w-80 shrink-0">
+                <ResearchCard {...research} />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Navigation Controls */}
+      <div className="mx-2 !mt-8 flex h-10 items-center justify-center gap-3.5">
+        <Link
+          href={"#contactEmailSection"}
+          className="flex h-full w-full max-w-md items-center justify-center !rounded-[4px] border-[1.75px] border-[#A1A0C5] !bg-[#EFEFF5] text-sm !text-[#323050]"
+          style={{
+            fontFamily: "Inter",
+            fontWeight: 400,
+            lineHeight: "120%",
+            letterSpacing: "-0.56px",
+          }}
+        >
+          <button className="">See All</button>
+        </Link>
       </div>
     </section>
   );
@@ -200,14 +260,14 @@ const ResearchCard = ({
           <path
             d="M5.2876 5.2876L12.7122 12.7122"
             stroke="#323150"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             d="M12.7124 9.53027V12.7123H9.53042"
             stroke="#323150"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </svg>
       </div>
@@ -215,31 +275,9 @@ const ResearchCard = ({
   </div>
 );
 
-const NavigationControls = () => (
-  <div className="mx-2 mt-4 flex h-10 items-center justify-center gap-3.5">
-    <button
-      className="prev 0 z-10 flex h-full rotate-180 items-center justify-center !rounded-sm border-[1.75px] border-[#A1A0C5] !bg-[#EFEFF5] p-2.5 transition-all"
-      aria-label="Previous slide"
-    >
-      <ArrowIcon />
-    </button>
-    <Link
-      href={"#contactEmailSection"}
-      className="flex h-full items-center justify-center !rounded-[4px] border-[1.75px] border-[#A1A0C5] !bg-[#EFEFF5] px-12 text-sm !text-[#323050]"
-      style={{
-        fontFamily: "Inter",
-        fontWeight: 400,
-        lineHeight: "120%",
-        letterSpacing: "-0.56px",
-      }}
-    >
-      <button className="">See All</button>
-    </Link>
-    <button
-      className="next z-10 flex h-full items-center justify-center !rounded-sm border-[1.75px] border-[#A1A0C5] !bg-[#EFEFF5] p-2.5 transition-all"
-      aria-label="Next slide"
-    >
-      <ArrowIcon />
-    </button>
-  </div>
-);
+// Add this to your CSS file or in a style tag in your document head
+const scrollbarHideStyles = `
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+`;
