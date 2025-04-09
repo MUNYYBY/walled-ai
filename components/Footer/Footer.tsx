@@ -108,14 +108,32 @@ export default function Footer() {
   return (
     <footer
       className={`relative !space-y-5 overflow-hidden bg-[#E0DEEC] !bg-cover !bg-center !bg-no-repeat py-20`}
-      style={{
-        background: `url('/footer_bg.svg')`,
-      }}
     >
-      <div className="container !space-y-5">
+      <div className="absolute top-0 -left-20 z-1 md:left-0 md:size-[50%]">
+        <Image
+          src="/home_page/deployment_bg-mobile.svg"
+          height={100}
+          width={100}
+          className="h-full w-full object-cover"
+          alt="bg"
+        />
+      </div>
+      <div className="absolute top-0 -right-20 z-1 md:right-0 md:size-[50%]">
+        <Image
+          src="/home_page/deployment_bg-mobile.svg"
+          height={100}
+          width={100}
+          className="h-full w-full scale-x-[-1] object-cover"
+          alt="bg"
+        />
+      </div>
+      <div className="relative z-10 container !space-y-5">
         {/* CTA Section */}
         <div className="!space-y-1 py-3.5 text-center">
-          <h2 className="!text-[2.75rem]" style={{ fontWeight: 400 }}>
+          <h2
+            className="!text-[2.15rem] md:!text-[2.75rem]"
+            style={{ fontWeight: 400 }}
+          >
             <span
               className="bg-clip-text px-1.5 text-transparent"
               style={{
@@ -153,7 +171,7 @@ export default function Footer() {
         ) : null}
         <div
           id="contactEmailSection"
-          className="mx-auto flex max-w-3xl flex-col gap-5 rounded-md bg-[#EEEEF4] px-3.5 py-2.5 sm:flex-row"
+          className="mx-auto flex max-w-3xl flex-row items-center justify-between rounded-md bg-[#EEEEF4] px-3.5 py-2.5 md:gap-5"
         >
           <>
             <input
@@ -163,19 +181,17 @@ export default function Footer() {
               }}
               type="email"
               placeholder="yourname@email.com"
-              className="flex-grow border-none px-2.5 py-0.5 pt-1.5 outline-none"
+              className="border-none px-2.5 py-0.5 pt-1.5 outline-none"
             />
             <button
-              className="flex items-center justify-center !rounded-sm px-8 py-1.5 !text-sm text-white transition-all duration-500"
+              className="flex items-center justify-center !rounded-sm px-2 pt-2 pb-1 !text-xs text-white transition-all duration-500 md:px-8 md:!text-sm"
               style={{
                 background:
                   "linear-gradient(92.82deg, #F93C52 -56.34%, #2B21F3 130.6%)",
               }}
               onClick={submit}
             >
-              <button className="pt-1">
-                {!contactIsProcessing ? "Start for Free" : "Processing..."}
-              </button>
+              {!contactIsProcessing ? "Start for Free" : "Processing..."}
             </button>
           </>
         </div>
@@ -184,35 +200,37 @@ export default function Footer() {
       <div className="container mx-auto grid grid-cols-2 gap-10 pt-14 md:grid-cols-2 lg:grid-cols-6">
         {/* Logo and Social */}
         <div className="col-span-2 flex flex-col gap-3.5">
-          <Link href="/" className="inline-block">
-            <Image
-              src="/images/walledailogo.png"
-              width={200}
-              height={50}
-              alt="Walled AI"
-              className="h-10 w-auto"
-              priority
-            />
-          </Link>
-          <div className="!mt-3 flex items-center gap-1.5">
-            {socialIcons.map((icon, index) => (
-              <Link
-                key={index}
-                href={icon.href || "#"}
-                target="_blank"
-                rel="noopener noreferrer"
-                className=""
-                aria-label={icon.alt}
-              >
-                <Image
-                  src={icon.src}
-                  width={24}
-                  height={24}
-                  alt={icon.alt}
-                  className="size-6"
-                />
-              </Link>
-            ))}
+          <div className="flex w-full flex-row items-center justify-between md:!flex-col md:items-start">
+            <Link href="/" className="inline-block">
+              <Image
+                src="/images/walledailogo.png"
+                width={200}
+                height={50}
+                alt="Walled AI"
+                className="h-10 w-auto"
+                priority
+              />
+            </Link>
+            <div className="!mt-3 flex items-center gap-1.5">
+              {socialIcons.map((icon, index) => (
+                <Link
+                  key={index}
+                  href={icon.href || "#"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className=""
+                  aria-label={icon.alt}
+                >
+                  <Image
+                    src={icon.src}
+                    width={24}
+                    height={24}
+                    alt={icon.alt}
+                    className="size-6"
+                  />
+                </Link>
+              ))}
+            </div>
           </div>
           <p
             className="text-sm"
