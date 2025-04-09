@@ -18,8 +18,8 @@ export default function Page() {
       <Deployment />
       <ProprietaryResearch />
       <ReasonToTry />
-      <CompanyTestamonials />
-      <InsightsOnResearch />
+      {/* <CompanyTestamonials />
+      <InsightsOnResearch /> */}
     </div>
   );
 }
