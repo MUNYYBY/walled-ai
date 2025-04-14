@@ -1,12 +1,15 @@
 "use client";
+
 import Image from "next/image";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 // Swiper component for mobile devices
 const MobileSwiper = ({ processes }: any) => {
@@ -131,6 +134,7 @@ const MobileSwiper = ({ processes }: any) => {
     </div>
   );
 };
+
 export default function ProtectionProcess() {
   const processes = [
     {
@@ -138,23 +142,99 @@ export default function ProtectionProcess() {
       description:
         "Deploy WalledProtect for seamless compliance with AI laws like the EU AI Act, GDPR, and regulations in 130+ countries.",
       link: "",
-      image: "/pp/pp-1.svg",
+      image: "/home_page/protection_process-1.svg",
     },
     {
       title: "Walled Redact",
       description:
         "Use WalledRedact to preserve data privacy and confidentiality while leveraging third-party LLMs, agents, and other AI solutions.",
       link: "",
-      image: "/pp/pp-2.svg",
+      image: "/home_page/protection_process-2.svg",
     },
     {
       title: "Walled Correct",
       description:
         "Fix problematic hallucinations and improve the reliability of production AI with WalledCorrect.",
       link: "",
-      image: "/pp/pp-3.svg",
+      image: "/home_page/protection_process-3.svg",
     },
   ];
+
+  const sectionRef = useRef(null);
+  const [currentStep, setCurrentStep] = useState(0);
+  const [imageHeight, setImageHeight] = useState(0);
+
+  useEffect(() => {
+    if (typeof window === "undefined" || window.innerWidth < 768) return;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const setHalfScreenHeight = () => {
+      setImageHeight(window.innerHeight / 2);
+    };
+
+    setHalfScreenHeight();
+    window.addEventListener("resize", setHalfScreenHeight);
+
+    // Create refs for progress bars
+    const progressBars = processes.map(() => ({ progress: 0 }));
+
+    const ctx = gsap.context(() => {
+      // Create a timeline with ScrollTrigger
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: "+=2000",
+          scrub: true,
+          pin: true,
+          anticipatePin: 1,
+          onUpdate: (self) => {
+            // Calculate overall progress (0-1)
+            const totalProgress = self.progress;
+
+            // Calculate which step we're on (0, 1, or 2)
+            const step = Math.floor(totalProgress * 3);
+            setCurrentStep(step > 2 ? 2 : step);
+
+            // Calculate progress within each step
+            progressBars.forEach((bar, index) => {
+              if (index < step) {
+                // Previous steps are 100% complete
+                bar.progress = 1;
+              } else if (index > step) {
+                // Future steps are 0% complete
+                bar.progress = 0;
+              } else {
+                // Current step progress (0-1 within this step)
+                bar.progress = totalProgress * 3 - step;
+              }
+            });
+
+            // Update DOM elements with current progress values
+            progressBars.forEach((bar, index) => {
+              const progressElement: any = document.querySelector(
+                `#progress-bar-${index}`,
+              );
+              if (progressElement) {
+                progressElement.style.width = `${bar.progress * 100}%`;
+              }
+            });
+          },
+        },
+      });
+
+      // Create 3 equal segments in the timeline (one for each step)
+      tl.to({}, { duration: 1 });
+      tl.to({}, { duration: 1 });
+      tl.to({}, { duration: 1 });
+    }, sectionRef);
+
+    return () => {
+      window.removeEventListener("resize", setHalfScreenHeight);
+      ctx.revert();
+    };
+  }, []);
 
   return (
     <>
@@ -200,85 +280,110 @@ export default function ProtectionProcess() {
               on a complete ecosystem of AI guardrails, each catering to
               specific challenges of AI in production
             </p>
-
-            <div className="mx-auto mt-5 hidden space-y-3.5 text-center md:block">
-              <Image
-                width={1000}
-                height={700}
-                src="/home_page/protection_process.svg"
-                alt="AI Protection Diagram"
-                className="w-full max-w-full"
-              />
-            </div>
-
-            {/* Desktop version */}
-            <div className="mx-auto hidden grid-cols-1 gap-6 md:grid md:grid-cols-3 md:gap-10">
-              {processes.map((process, i) => (
-                <div key={i} className="flex flex-col gap-4">
-                  <motion.div
-                    className="group relative rounded-xl bg-transparent px-3 py-3 text-white transition-all duration-300"
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{
-                      delay: i * 0.2,
-                      duration: 0.8,
-                      ease: "easeOut",
-                    }}
-                  >
-                    <div className="relative flex min-h-36 flex-col space-y-4">
-                      <Link
-                        className="absolute top-0 right-0 flex rotate-45 items-center justify-center gap-2.5 rounded-full !bg-[#4F4E7E] p-2 transition-all duration-300 group-hover:rotate-0 group-hover:bg-gradient-to-r group-hover:from-[#F93C52] group-hover:to-[#2B21F3]"
-                        href={process.link}
-                      >
-                        <svg
-                          width="18"
-                          height="18"
-                          viewBox="0 0 18 18"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M3.42065 9.79517L13.9207 9.79517"
-                            stroke="#EFEFF5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                          <path
-                            d="M11.6702 7.54565L13.9202 9.79565L11.6702 12.0457"
-                            stroke="#EFEFF5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      </Link>
-                      <h3
-                        className="text-left !text-2xl font-medium !text-[#4F4E7E] transition-all duration-300 group-hover:!text-white"
-                        style={{
-                          fontFamily: "Inter",
-                          fontWeight: 600,
-                        }}
-                      >
-                        {process.title}
-                      </h3>
-                      <p
-                        className="text-left !text-[0.925rem] !text-[#4F4E7E] transition-all duration-300 group-hover:!text-white"
-                        style={{ fontFamily: "Inter", fontWeight: 300 }}
-                      >
-                        {process.description}
-                      </p>
-                    </div>
-                    <motion.div className="relative h-1 w-full overflow-hidden rounded-full bg-[#28273F]">
-                      <motion.div className="absolute top-0 left-0 h-full w-0 rounded-full bg-gradient-to-r from-[#F93C52] to-[#2B21F3] transition-all duration-300 group-hover:w-full" />
-                    </motion.div>
-                  </motion.div>
-                </div>
-              ))}
-            </div>
           </motion.div>
         </div>
       </section>
+
+      {/* DESKTOP SCROLL SECTION */}
+      <div
+        ref={sectionRef}
+        className="mx-auto hidden w-full max-w-6xl flex-col items-center justify-center px-4 pt-20 md:flex"
+      >
+        <div>
+          <Image
+            width={1200}
+            height={imageHeight + 10}
+            src={processes[currentStep].image}
+            alt="Protection Step Image"
+            className="!mb-5 object-contain transition-all duration-500 ease-in-out"
+            style={{ height: `${imageHeight + 10}px` }}
+          />
+        </div>
+
+        <div className="grid w-full grid-cols-3 gap-10">
+          {/* Replace the progress bar div in the existing component with this version */}
+          {processes.map((process, i) => {
+            const id = `progress-bar-${i}`;
+            return (
+              <div key={i} className="flex flex-col gap-4">
+                <motion.div
+                  className={`relative rounded-xl px-3 py-3 text-white transition-all duration-300 ${
+                    i === currentStep ? "bg-[#28273F]" : "bg-transparent"
+                  }`}
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    delay: i * 0.2,
+                    duration: 0.8,
+                    ease: "easeOut",
+                  }}
+                >
+                  <div className="relative flex min-h-32 flex-col space-y-4">
+                    <Link
+                      className={`absolute top-0 right-0 flex rotate-45 items-center justify-center gap-2.5 rounded-full p-2 transition-all duration-300 ${
+                        i === currentStep
+                          ? "rotate-0 bg-gradient-to-r from-[#F93C52] to-[#2B21F3]"
+                          : "bg-[#4F4E7E]"
+                      }`}
+                      href={process.link}
+                    >
+                      <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 18 18"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M3.42065 9.79517L13.9207 9.79517"
+                          stroke="#EFEFF5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                        <path
+                          d="M11.6702 7.54565L13.9202 9.79565L11.6702 12.0457"
+                          stroke="#EFEFF5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </Link>
+                    <h3
+                      className={`text-left text-xl font-medium transition-all duration-300 ${
+                        i === currentStep ? "text-white" : "text-[#4F4E7E]"
+                      }`}
+                      style={{
+                        fontFamily: "Inter",
+                        fontWeight: 600,
+                      }}
+                    >
+                      {process.title}
+                    </h3>
+                    <p
+                      className={`text-left text-[0.725rem] transition-all duration-300 ${
+                        i === currentStep ? "text-white" : "text-[#4F4E7E]"
+                      }`}
+                      style={{ fontFamily: "Inter", fontWeight: 300 }}
+                    >
+                      {process.description}
+                    </p>
+                  </div>
+                  <div className="relative h-1 w-full overflow-hidden rounded-full bg-[#28273F]">
+                    <div
+                      id={id}
+                      className="absolute top-0 left-0 h-full rounded-full bg-gradient-to-r from-[#F93C52] to-[#2B21F3]"
+                      style={{ width: "0%" }}
+                    />
+                  </div>
+                </motion.div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* MOBILE SWIPER SECTION */}
       <div className="pt-5 pb-20">
-        {/* Mobile swiper */}
         <MobileSwiper processes={processes} />
       </div>
     </>
