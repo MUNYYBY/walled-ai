@@ -285,20 +285,24 @@ export default function ProtectionProcess() {
       </section>
 
       {/* DESKTOP SCROLL SECTION */}
-      <div
+      <motion.div
         ref={sectionRef}
         className="mx-auto hidden w-full max-w-6xl flex-col items-center justify-center px-4 pt-20 md:flex"
       >
-        <div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
+        >
           <Image
             width={1200}
             height={imageHeight + 10}
             src={processes[currentStep].image}
             alt="Protection Step Image"
-            className="!mb-5 object-contain transition-all duration-500 ease-in-out"
+            className="!mb-10 object-contain transition-all duration-500 ease-in-out"
             style={{ height: `${imageHeight + 10}px` }}
           />
-        </div>
+        </motion.div>
 
         <div className="grid w-full grid-cols-3 gap-10">
           {/* Replace the progress bar div in the existing component with this version */}
@@ -380,7 +384,7 @@ export default function ProtectionProcess() {
             );
           })}
         </div>
-      </div>
+      </motion.div>
 
       {/* MOBILE SWIPER SECTION */}
       <div className="pt-5 pb-20">
