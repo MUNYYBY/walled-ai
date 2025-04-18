@@ -1,11 +1,13 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
+import { useTheme } from "@/hooks/useTheme";
+import clsx from "clsx";
 
 // Mobile Swiper component for deployment images
 const DeploymentSwiper = () => {
@@ -85,9 +87,18 @@ const DeploymentSwiper = () => {
 };
 
 export default function DeploymentGuardrails() {
+  //** theme context */
+  const theme = useTheme();
+  const { darkMode } = theme;
+
   return (
     <>
-      <section className="relative flex flex-col items-center gap-10 bg-[#E0DEEC] !bg-cover !bg-no-repeat py-20">
+      <section
+        className={clsx(
+          "relative flex flex-col items-center gap-10 !bg-cover !bg-no-repeat py-20 transition-all duration-500",
+          darkMode ? "bg-[#141320]" : "bg-[#E0DEEC]",
+        )}
+      >
         <div className="absolute top-0 left-0 z-1 md:size-[50%]">
           <Image
             src="/home_page/deployment_bg-mobile.svg"
@@ -101,7 +112,10 @@ export default function DeploymentGuardrails() {
           <div className="flex flex-col items-center">
             <div className="space-y-3.5">
               <h2
-                className="text-center !text-[2.35rem] -tracking-wide !text-[#323150] md:!text-[2.75rem]"
+                className={clsx(
+                  "text-center !text-[2.35rem] -tracking-wide md:!text-[2.75rem]",
+                  darkMode ? "!text-[#F5F5F7]" : "!text-[#323150]",
+                )}
                 style={{ fontWeight: 400 }}
               >
                 <span
@@ -119,7 +133,10 @@ export default function DeploymentGuardrails() {
               </h2>
             </div>
             <p
-              className="text-center !text-[1rem] leading-5"
+              className={clsx(
+                "text-center !text-[1rem] leading-5",
+                darkMode ? "!text-[#E0E0E6]" : "",
+              )}
               style={{ fontFamily: "Inter", fontWeight: 400 }}
             >
               WalledAI further supports both collective and standalone
@@ -157,106 +174,23 @@ export default function DeploymentGuardrails() {
           </div>
 
           <p
-            className="text-center !text-[1.125rem]"
+            className={clsx(
+              "text-center !text-[1.125rem]",
+              darkMode ? "!text-[#E0E0E6]" : "",
+            )}
             style={{ fontFamily: "Inter", fontWeight: 375 }}
           >
             <Link
-              className="text-left !text-[#2B21F3] !underline md:text-center"
+              className={clsx(
+                "text-left !underline md:text-center",
+                darkMode ? "!text-[#756EF7]" : "!text-[#2B21F3]",
+              )}
               href={"#contactEmailSection"}
             >
               Connect with our experts
             </Link>{" "}
             to explore the ideal guardrail setup for your use case
           </p>
-        </div>
-      </section>
-      <section
-        className="flex flex-col items-center gap-10 overflow-hidden !bg-cover !bg-center !bg-no-repeat py-20"
-        style={{
-          background: `url('/home_page/comparison_bg.svg')`,
-        }}
-      >
-        <div className="container flex flex-col items-center gap-10">
-          <div className="item-start flex flex-col !gap-[0.5rem] md:items-center">
-            <h2
-              className="text-center !text-[2.35rem] -tracking-wide !text-[#EFEFF5] md:!text-[2.75rem]"
-              style={{ fontWeight: 400, margin: 0 }}
-            >
-              <span
-                className="!mr-2 bg-clip-text text-white"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(to right, #F93C52, #2B21F3)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                }}
-              >
-                Best-In-Class
-              </span>
-              Metrics that Beat Popular Alternatives
-            </h2>
-            <p
-              className="text-center leading-5 !text-[#EFEFF5]"
-              style={{ fontFamily: "Inter", fontWeight: 300, margin: 0 }}
-            >
-              WalledAI is demonstrably superior to similar solutions in terms of{" "}
-              <br />
-              speed, accuracy, and reliability.
-            </p>
-
-            <p
-              className="!mt-2 max-w-6xl text-center text-base text-[1.5rem] text-white"
-              style={{ fontWeight: 300, fontFamily: "Anek Devanagari" }}
-            >
-              Make the switch to enjoy sturdier AI protection that provides more
-              bang for your buck.
-            </p>
-            <Link
-              className="flex items-center justify-center rounded-[4px] border-[1.75px] border-[#A1A0C5] px-4 py-2.5 text-center text-sm !text-[#EFEFF5] no-underline hover:no-underline"
-              href={"#contactEmailSection"}
-            >
-              <button
-                className=""
-                style={{
-                  fontFamily: "Inter",
-                  fontWeight: 300,
-                }}
-              >
-                Grab a FREE Demo to experience the difference for yourself{" "}
-                {"->"}
-              </button>
-            </Link>
-          </div>
-          <Image
-            src={"/home_page/deploy_graph.svg"}
-            width={1050}
-            height={450}
-            alt=""
-          />
-          <div className="flex items-center gap-[1rem]">
-            {[
-              { color: "#F46E56", label: "No Guardrails" },
-              { color: "#756EF7", label: "Other Guardrails" },
-              {
-                color:
-                  "linear-gradient(93deg, #F93C52 -56.34%, #2B21F3 130.6%)",
-                label: "Walled AI Guardrails",
-              },
-            ].map((_, i) => (
-              <div key={i} className="flex !items-center gap-[0.35rem]">
-                <div
-                  className={`size-[1rem] rounded-full`}
-                  style={{ background: _.color }}
-                />
-                <span
-                  className="pt-2 !text-[10px] !text-[#EFEFF5] md:!text-base"
-                  style={{ fontWeight: 300 }}
-                >
-                  {_.label}
-                </span>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
     </>

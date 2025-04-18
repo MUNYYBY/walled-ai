@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 export default function WelcomeBanner() {
   return (
-    <section className="relative w-full bg-[url('/home_page/main_banner.svg')] bg-cover bg-center bg-no-repeat py-24 md:py-20">
+    <section className="relative min-h-[500px] w-full bg-[url('/home_page/main_banner.svg')] bg-cover bg-center bg-no-repeat py-24 md:py-20">
       <div className="text-[var(--anek) z-[1] flex items-center justify-center pt-16">
         <motion.div
           className="container mx-auto space-y-3.5 text-center"

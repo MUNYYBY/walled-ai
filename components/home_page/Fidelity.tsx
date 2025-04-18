@@ -1,12 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import SimpleMovingGradients from "../Animations/BackgroundAnimation";
 
 export default function Fidelity() {
   return (
     <>
       <section
-        className="overflow-hidden bg-[#E0DEEC] !bg-cover !bg-center !bg-no-repeat pb-12 sm:pb-16 lg:pb-20"
+        className="relative overflow-hidden bg-[#E0DEEC] !bg-cover !bg-center !bg-no-repeat pb-12 sm:pb-16 lg:pb-20"
         style={{
           background: `url('/home_page/fidelity_bg.svg')`,
         }}
@@ -21,7 +22,7 @@ export default function Fidelity() {
               alt="Fidelity Logo"
             />
           </div>
-          <div className="!space-y-3.5">
+          <div className="relative z-10 !space-y-3.5">
             <h2
               className="!text-[2.55rem] font-semibold !text-[#323150] md:!text-[2.75rem]"
               style={{ fontWeight: 400, letterSpacing: "-1px" }}
@@ -83,6 +84,9 @@ export default function Fidelity() {
             alt="Background Pattern"
           />
           <div className="absolute top-3/4 left-full h-[500px] w-[500px] rounded-full bg-purple-300 opacity-50 blur-3xl"></div>
+        </div>
+        <div className="absolute -right-72 -bottom-16 z-0 rounded-full">
+          <SimpleMovingGradients />
         </div>
       </section>
       <section className="overflow-hidden bg-[#EFEFF5] !bg-cover !bg-center !bg-no-repeat py-20">

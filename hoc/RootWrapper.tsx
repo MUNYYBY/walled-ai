@@ -1,4 +1,5 @@
 import HomeLayout from "@/layout/HomeLayout";
+import { ThemeProvider } from "next-themes";
 import React from "react";
 import { Toaster } from "react-hot-toast";
 
@@ -9,8 +10,10 @@ export default function RootWrapper({
 }) {
   return (
     <>
-      <HomeLayout>{children}</HomeLayout>
-      <Toaster />
+      <ThemeProvider>
+        <HomeLayout>{children}</HomeLayout>
+        <Toaster />
+      </ThemeProvider>
     </>
   );
 }

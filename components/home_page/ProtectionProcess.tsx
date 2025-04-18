@@ -237,8 +237,8 @@ export default function ProtectionProcess() {
   }, []);
 
   return (
-    <>
-      <section className="relative container mx-auto px-4 pt-20">
+    <div className="bg-[#141320]">
+      <section className="relative container mx-auto px-4 py-20">
         <div className="z-[1] flex items-center justify-center">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -390,6 +390,6 @@ export default function ProtectionProcess() {
       <div className="pt-5 pb-20">
         <MobileSwiper processes={processes} />
       </div>
-    </>
+    </div>
   );
 }
