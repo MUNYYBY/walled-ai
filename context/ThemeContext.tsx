@@ -24,16 +24,9 @@ const ThemeProvider = ({ children }: Props) => {
   // ** States
   const [darkMode, setDarkMode] = useState<boolean>(defaultProvider.darkMode);
 
-  useEffect(() => {
-    console.log("ThemeContext darkMode updated:", darkMode);
-  }, [darkMode]);
-
   const values: ThemeContextType = {
     darkMode,
-    setDarkMode: (value: boolean) => {
-      console.log("setDarkMode called with:", value);
-      setDarkMode(value);
-    },
+    setDarkMode,
   };
 
   return (

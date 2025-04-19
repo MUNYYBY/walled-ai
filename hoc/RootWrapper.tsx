@@ -1,5 +1,5 @@
+import { ThemeProvider } from "@/context/ThemeContext";
 import HomeLayout from "@/layout/HomeLayout";
-import { ThemeProvider } from "next-themes";
 import React from "react";
 import { Toaster } from "react-hot-toast";
 

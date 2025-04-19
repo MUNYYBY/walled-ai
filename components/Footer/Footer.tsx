@@ -6,6 +6,8 @@ import axios from "axios";
 import baseUrl from "@/utils/baseUrl";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import { useTheme } from "@/hooks/useTheme";
+import clsx from "clsx";
 
 interface SocialIcon {
   src: string;
@@ -19,6 +21,10 @@ declare global {
 }
 
 export default function Footer() {
+  //** theme context */
+  const theme = useTheme();
+  const { darkMode } = theme;
+
   const socialIcons: SocialIcon[] = [
     { src: "/icons/twiter.svg", alt: "Twitter", href: "https://twitter.com" },
     {
@@ -112,14 +118,20 @@ export default function Footer() {
 
   return (
     <footer
-      className={`relative !space-y-5 overflow-hidden bg-[#E0DEEC] !bg-cover !bg-center !bg-no-repeat py-20`}
+      className={clsx(
+        `relative !space-y-5 overflow-hidden !bg-cover !bg-center !bg-no-repeat py-20 transition-all duration-500`,
+        darkMode ? "bg-[#141320]" : "bg-[#E0DEEC]",
+      )}
     >
       <div className="absolute top-0 -left-20 z-1 md:left-0 md:size-[50%]">
         <Image
           src="/home_page/deployment_bg-mobile.svg"
           height={100}
           width={100}
-          className="h-full w-full object-cover"
+          className={clsx(
+            "h-full w-full object-cover",
+            darkMode && "opacity-10",
+          )}
           alt="bg"
         />
       </div>
@@ -128,7 +140,10 @@ export default function Footer() {
           src="/home_page/deployment_bg-mobile.svg"
           height={100}
           width={100}
-          className="h-full w-full scale-x-[-1] object-cover"
+          className={clsx(
+            "h-full w-full scale-x-[-1] object-cover",
+            darkMode && "opacity-10",
+          )}
           alt="bg"
         />
       </div>
@@ -136,7 +151,10 @@ export default function Footer() {
         {/* CTA Section */}
         <div className="flex flex-col items-center justify-center !space-y-1 py-3.5 text-center">
           <h2
-            className="!text-[2.15rem] md:!text-[2.75rem]"
+            className={clsx(
+              "!text-[2.15rem] md:!text-[2.75rem]",
+              darkMode ? "!text-[#F5F5F7]" : "",
+            )}
             style={{ fontWeight: 400 }}
           >
             {pathname === "/about-us" ? "Lets's" : ""}
@@ -156,9 +174,11 @@ export default function Footer() {
               : "Without Serious Commitments"}
           </h2>
           <p
-            className="w-full max-w-lg text-center text-sm sm:text-base"
+            className={clsx(
+              "w-full max-w-lg text-center text-sm sm:text-base",
+              darkMode ? "!text-[#E0E0E6]" : "text-[#323150]",
+            )}
             style={{
-              color: "#323150",
               fontFamily: "Inter",
               fontWeight: 400,
               lineHeight: "120%",
@@ -177,15 +197,21 @@ export default function Footer() {
         </div>
         {contacted ? (
           <div
-            className="text-center text-green-600"
-            style={{ color: "#4b25da", fontSize: "1em" }}
+            className="text-center"
+            style={{
+              color: darkMode ? "#8A84FD" : "#4b25da",
+              fontSize: "1em",
+            }}
           >
             Thanks for showing your interest. We will be in touch with you soon.
           </div>
         ) : null}
         <div
           id="contactEmailSection"
-          className="mx-auto flex max-w-3xl flex-row items-center justify-between rounded-md bg-[#EEEEF4] px-3.5 py-2.5 md:gap-5"
+          className={clsx(
+            "mx-auto flex max-w-3xl flex-row items-center justify-between rounded-md px-3.5 py-2.5 md:gap-5",
+            darkMode ? "bg-[#272638]" : "bg-[#EEEEF4]",
+          )}
         >
           <>
             <input
@@ -195,7 +221,10 @@ export default function Footer() {
               }}
               type="email"
               placeholder="yourname@email.com"
-              className="border-none px-2.5 py-0.5 pt-1.5 outline-none"
+              className={clsx(
+                "border-none px-2.5 py-0.5 pt-1.5 outline-none",
+                darkMode ? "bg-[#272638] !text-[#E0E0E6]" : "bg-[#EEEEF4]",
+              )}
             />
             <button
               className="flex items-center justify-center !rounded-sm px-2 pt-2 pb-1 !text-xs text-white transition-all duration-500 md:px-8 md:!text-sm"
@@ -217,7 +246,11 @@ export default function Footer() {
           <div className="flex w-full flex-row items-center justify-between md:!flex-col md:items-start">
             <Link href="/" className="inline-block">
               <Image
-                src="/images/walledailogo.png"
+                src={
+                  darkMode
+                    ? "/images/walledailogo_dark.png"
+                    : "/images/walledailogo.png"
+                }
                 width={200}
                 height={50}
                 alt="Walled AI"
@@ -247,9 +280,11 @@ export default function Footer() {
             </div>
           </div>
           <p
-            className="text-sm"
+            className={clsx(
+              "text-sm",
+              darkMode ? "!text-[#E0E0E6]" : "!text-[#323150]",
+            )}
             style={{
-              color: "#323150",
               fontFamily: "Inter",
               fontWeight: 300,
               lineHeight: "120%" /* 21.6px */,
@@ -264,9 +299,11 @@ export default function Footer() {
         {footer_sections.map((section, index) => (
           <div key={index} className="space-y-4">
             <h3
-              className="!text-lg"
+              className={clsx(
+                "!text-lg",
+                darkMode ? "!text-[#F5F5F7]" : "!text-[#323150]",
+              )}
               style={{
-                color: "#323150",
                 fontFamily: "Inter",
                 fontWeight: 500,
                 lineHeight: "120%" /* 21.6px */,
@@ -280,7 +317,10 @@ export default function Footer() {
                 <li key={linkIndex}>
                   <Link
                     href={link.href}
-                    className="!text-sm !font-light !text-[#323050] transition-all duration-300 hover:underline"
+                    className={clsx(
+                      "!text-sm !font-light transition-all duration-300 hover:underline",
+                      darkMode ? "!text-[#E0E0E6]" : "!text-[#323050]",
+                    )}
                     style={{
                       /* Inter 18px/Light - Body Text */
                       fontFamily: "Inter",

@@ -7,7 +7,6 @@ import ReasonToTry from "@/components/home_page/ReasonToTry";
 import Backed_By from "@/components/home_page/Backed_By";
 import Fidelity from "@/components/home_page/Fidelity";
 import DeploymentGuardrails from "@/components/home_page/DeploymentGuardrails";
-import { useTheme } from "@/hooks/useTheme";
 import BestInClass from "@/components/home_page/BestInClass";
 
 export default function Page() {

@@ -8,6 +8,8 @@ import { Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import { useTheme } from "@/hooks/useTheme";
+import clsx from "clsx";
 
 interface ResearchItem {
   image: string;
@@ -53,6 +55,8 @@ const SWIPER_BREAKPOINTS = {
 // Mobile Swiper for Research Data
 const MobileResearchSwiper = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const theme = useTheme();
+  const { darkMode } = theme;
 
   return (
     <div className="relative w-full md:hidden">
@@ -87,7 +91,7 @@ const MobileResearchSwiper = () => {
           width: 15px;
           height: 8px;
           border-radius: 40%;
-          background: #c1c0d8;
+          background: ${darkMode ? "#3F3E5A" : "#C1C0D8"};
           margin: 0 4px;
           cursor: pointer;
           transition: all 0.3s ease;
@@ -116,12 +120,24 @@ const MobileResearchSwiper = () => {
 };
 
 export default function ProprietaryResearch() {
+  //** theme context */
+  const theme = useTheme();
+  const { darkMode } = theme;
+
   return (
-    <section className="bg-[#EEEEF4] py-20">
+    <section
+      className={clsx(
+        "py-20 transition-all duration-500",
+        darkMode ? "bg-[#1C1B2C]" : "bg-[#EEEEF4]",
+      )}
+    >
       <div className="container mx-auto w-3/4 px-4">
         <div className="mb-12 flex flex-col items-center text-center">
           <h2
-            className="text-center !text-[2.35rem] -tracking-wide !text-[#323150] md:!text-[2.75rem]"
+            className={clsx(
+              "text-center !text-[2.35rem] -tracking-wide md:!text-[2.75rem]",
+              darkMode ? "!text-[#F5F5F7]" : "!text-[#323150]",
+            )}
             style={{ fontWeight: 400, margin: 0 }}
           >
             Powered by Years of Proprietary{" "}
@@ -139,7 +155,6 @@ export default function ProprietaryResearch() {
           </h2>
           <p
             style={{
-              color: "#323150",
               textAlign: "center",
               fontFamily: "Inter",
               fontStyle: "normal",
@@ -147,7 +162,10 @@ export default function ProprietaryResearch() {
               lineHeight: "120%" /* 21.6px */,
               letterSpacing: "-0.72px",
             }}
-            className="!text-[1.125rem]"
+            className={clsx(
+              "!text-[1.125rem]",
+              darkMode ? "!text-[#E0E0E6]" : "!text-[#323150]",
+            )}
           >
             WalledAI is grounded in years of proprietary research on AI systems
             and associated metrics like safety, security, and reliability. Count
@@ -187,83 +205,113 @@ export default function ProprietaryResearch() {
   );
 }
 
-const ResearchCard = ({ image, title, description }: ResearchItem) => (
-  <div className="flex h-96 max-w-fit flex-col overflow-hidden rounded-[1.75rem] bg-[#E0DEEC] p-1 transition-all hover:shadow-lg 2xl:h-fit">
-    <div className="relative aspect-video w-full">
-      <Image
-        src={image}
-        alt={title}
-        width={350}
-        height={185}
-        className="h-full w-full object-cover"
-      />
-    </div>
-    <div className="flex flex-1 items-end gap-1 !px-[0.925rem] !py-[1rem]">
-      <div>
-        <span
-          className="!text-2xl font-semibold !text-[#323150]"
-          style={{
-            fontFamily: "Inter",
-            fontWeight: 600,
-            letterSpacing: "-0.96px",
-          }}
-        >
-          {title}
-        </span>
-        <p
-          className="!mt-2.5"
-          style={{
-            color: "#323150",
-            fontFamily: "Inter",
-            fontWeight: 400,
-            lineHeight: "120%" /* 21.6px */,
-            letterSpacing: "-0.72px",
-          }}
-        >
-          {description}
-        </p>
-      </div>
-      <div className="!mr-2 !mb-2 rounded-full !bg-[#EFEFF5] p-2.5">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="15"
-          height="15"
-          viewBox="0 0 18 18"
-          fill="none"
-        >
-          <path
-            d="M5.2876 5.2876L12.7122 12.7122"
-            stroke="#323150"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M12.7124 9.53027V12.7123H9.53042"
-            stroke="#323150"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </div>
-    </div>
-  </div>
-);
+const ResearchCard = ({ image, title, description }: ResearchItem) => {
+  const theme = useTheme();
+  const { darkMode } = theme;
 
-const NavigationControls = () => (
-  <div className="mx-2 mb-4 flex h-10 items-center justify-center gap-3.5 md:mt-4 md:mb-0">
-    <Link
-      href={"#contactEmailSection"}
-      className="flex h-full w-full max-w-md items-center justify-center !rounded-[4px] border-[1.75px] border-[#A1A0C5] text-sm !text-[#323050] hover:bg-gray-100"
-      style={{
-        fontFamily: "Inter",
-        fontWeight: 400,
-        lineHeight: "120%",
-        letterSpacing: "-0.56px",
-      }}
+  return (
+    <div
+      className={clsx(
+        "flex h-96 max-w-fit flex-col overflow-hidden rounded-[1.75rem] p-1 transition-all hover:shadow-lg 2xl:h-fit",
+        darkMode ? "bg-[#272638]" : "bg-[#E0DEEC]",
+      )}
     >
-      <button className="">
-        Meet our research team <span className="!text-[12px]">{"🡢"}</span>
-      </button>
-    </Link>
-  </div>
-);
+      <div className="relative aspect-video w-full">
+        <Image
+          src={image}
+          alt={title}
+          width={350}
+          height={185}
+          className="h-full w-full object-cover"
+        />
+      </div>
+      <div className="flex flex-1 items-end gap-1 !px-[0.925rem] !py-[1rem]">
+        <div>
+          <span
+            className={clsx(
+              "!text-2xl font-semibold",
+              darkMode ? "!text-[#F5F5F7]" : "!text-[#323150]",
+            )}
+            style={{
+              fontFamily: "Inter",
+              fontWeight: 600,
+              letterSpacing: "-0.96px",
+            }}
+          >
+            {title}
+          </span>
+          <p
+            style={{
+              fontFamily: "Inter",
+              fontWeight: 400,
+              lineHeight: "120%" /* 21.6px */,
+              letterSpacing: "-0.72px",
+            }}
+            className={clsx(
+              "!mt-2.5",
+              darkMode ? "!text-[#E0E0E6]" : "!text-[#323150]",
+            )}
+          >
+            {description}
+          </p>
+        </div>
+        <div
+          className={clsx(
+            "!mr-2 !mb-2 rounded-full p-2.5",
+            darkMode ? "!bg-[#1C1B2C]" : "!bg-[#EFEFF5]",
+          )}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="15"
+            height="15"
+            viewBox="0 0 18 18"
+            fill="none"
+          >
+            <path
+              d="M5.2876 5.2876L12.7122 12.7122"
+              stroke={darkMode ? "#F5F5F7" : "#323150"}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M12.7124 9.53027V12.7123H9.53042"
+              stroke={darkMode ? "#F5F5F7" : "#323150"}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const NavigationControls = () => {
+  const theme = useTheme();
+  const { darkMode } = theme;
+
+  return (
+    <div className="mx-2 mb-4 flex h-10 items-center justify-center gap-3.5 md:mt-4 md:mb-0">
+      <Link
+        href={"#contactEmailSection"}
+        className={clsx(
+          "hover:bg-opacity-10 flex h-full w-full max-w-md items-center justify-center !rounded-[4px] border-[1.75px] text-sm hover:bg-white",
+          darkMode
+            ? "border-[#504F75] !text-[#E0E0E6]"
+            : "border-[#A1A0C5] !text-[#323050] hover:bg-gray-100",
+        )}
+        style={{
+          fontFamily: "Inter",
+          fontWeight: 400,
+          lineHeight: "120%",
+          letterSpacing: "-0.56px",
+        }}
+      >
+        <button className="">
+          Meet our research team <span className="!text-[12px]">{"🡢"}</span>
+        </button>
+      </Link>
+    </div>
+  );
+};

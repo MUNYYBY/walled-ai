@@ -1,6 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Anek_Devanagari } from "next/font/google";
-import { Toaster } from "react-hot-toast";
 import type { Metadata } from "next";
 import "./globals.css";
 import Script from "next/script";

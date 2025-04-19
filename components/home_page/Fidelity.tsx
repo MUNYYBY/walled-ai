@@ -1,15 +1,28 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import SimpleMovingGradients from "../Animations/BackgroundAnimation";
+import { useTheme } from "@/hooks/useTheme";
+import clsx from "clsx";
 
 export default function Fidelity() {
+  //** theme context */
+  const theme = useTheme();
+  const { darkMode } = theme;
+
   return (
     <>
       <section
-        className="relative overflow-hidden bg-[#E0DEEC] !bg-cover !bg-center !bg-no-repeat pb-12 sm:pb-16 lg:pb-20"
+        className={clsx(
+          "relative overflow-hidden !bg-cover !bg-center !bg-no-repeat pb-12 transition-all duration-500 sm:pb-16 lg:pb-20",
+          darkMode ? "!bg-[#141320]" : "!bg-[#E0DEEC]",
+        )}
         style={{
-          background: `url('/home_page/fidelity_bg.svg')`,
+          background: darkMode
+            ? `url('/home_page/fidelity_bg_dark.svg')`
+            : `url('/home_page/fidelity_bg.svg')`,
         }}
       >
         <div className="relative container mx-auto flex flex-col items-center gap-10 md:flex-row md:justify-center md:gap-20">
@@ -24,7 +37,10 @@ export default function Fidelity() {
           </div>
           <div className="relative z-10 !space-y-3.5">
             <h2
-              className="!text-[2.55rem] font-semibold !text-[#323150] md:!text-[2.75rem]"
+              className={clsx(
+                "!text-[2.55rem] font-semibold md:!text-[2.75rem]",
+                darkMode ? "!text-[#F5F5F7]" : "!text-[#323150]",
+              )}
               style={{ fontWeight: 400, letterSpacing: "-1px" }}
             >
               <span
@@ -50,16 +66,21 @@ export default function Fidelity() {
                 alt="Fidelity Logo"
               />
             </div>
-            <div className="!space-y-5 !text-[1.125rem]">
+            <div
+              className={clsx(
+                "!space-y-5 !text-[1.125rem]",
+                darkMode ? "!text-[#E0E0E6]" : "",
+              )}
+            >
               <p
-                className="max-w-lg leading-5"
+                className={clsx("max-w-lg leading-5")}
                 style={{ fontFamily: "Inter", fontWeight: 375 }}
               >
                 Supercharge AI deployments without sharing data outside
                 enterprise bounds.
               </p>
               <p
-                className="max-w-lg leading-5"
+                className={clsx("max-w-lg leading-5")}
                 style={{ fontFamily: "Inter", fontWeight: 375 }}
               >
                 WalledAI{"'"}s guardrails can be deployed 100% within
@@ -67,7 +88,7 @@ export default function Fidelity() {
                 confidentiality.
               </p>
               <p
-                className="max-w-lg leading-5"
+                className={clsx("max-w-lg leading-5")}
                 style={{ fontFamily: "Inter", fontWeight: 375 }}
               >
                 WalledAI also enables you to leverage third-party LLMs and AI
@@ -77,23 +98,39 @@ export default function Fidelity() {
             </div>
           </div>
           <Image
-            className="absolute top-full left-full"
+            className={clsx(
+              "absolute top-full left-full",
+              darkMode && "opacity-10",
+            )}
             src="/home_page/backed_by/bg_pattern.svg"
             width={500}
             height={450}
             alt="Background Pattern"
           />
-          <div className="absolute top-3/4 left-full h-[500px] w-[500px] rounded-full bg-purple-300 opacity-50 blur-3xl"></div>
-        </div>
-        <div className="absolute -right-72 -bottom-16 z-0 rounded-full">
-          <SimpleMovingGradients />
+          <div
+            className={clsx(
+              "absolute top-3/4 left-full h-[500px] w-[500px] rounded-full bg-purple-300 blur-3xl",
+              darkMode ? "opacity-15" : "opacity-50",
+            )}
+          ></div>
+          <div className="absolute -right-[35rem] -bottom-44 z-0 rounded-full">
+            <SimpleMovingGradients />
+          </div>
         </div>
       </section>
-      <section className="overflow-hidden bg-[#EFEFF5] !bg-cover !bg-center !bg-no-repeat py-20">
+      <section
+        className={clsx(
+          "overflow-hidden !bg-cover !bg-center !bg-no-repeat py-20 transition-all duration-500",
+          darkMode ? "bg-[#1C1B2C]" : "bg-[#EFEFF5]",
+        )}
+      >
         <div className="relative container mx-auto flex flex-col items-center gap-10 md:flex-row md:justify-center md:gap-20">
           <div className="space-y-3.5">
             <h2
-              className="!text-[2.55rem] !text-[#323150] md:!text-[2.75rem]"
+              className={clsx(
+                "!text-[2.55rem] md:!text-[2.75rem]",
+                darkMode ? "!text-[#F5F5F7]" : "!text-[#323150]",
+              )}
               style={{ fontWeight: 400, letterSpacing: "-1px" }}
             >
               Only AI Guardrail <br className="block md:hidden" />
@@ -119,16 +156,21 @@ export default function Fidelity() {
                 alt="Fidelity Chat"
               />
             </div>
-            <div className="!space-y-5 !text-[1.125rem]">
+            <div
+              className={clsx(
+                "!space-y-5 !text-[1.125rem]",
+                darkMode ? "!text-[#E0E0E6]" : "",
+              )}
+            >
               <p
-                className="max-w-lg leading-5"
+                className={clsx("max-w-lg leading-5")}
                 style={{ fontFamily: "Inter", fontWeight: 375 }}
               >
                 Your search for AI guardrails that accommodates specific
                 enterprise needs ends here.
               </p>
               <p
-                className="max-w-lg leading-5"
+                className={clsx("max-w-lg leading-5")}
                 style={{ fontFamily: "Inter", fontWeight: 375 }}
               >
                 Ensure compliance with company policies, build custom data
@@ -136,12 +178,15 @@ export default function Fidelity() {
                 tailored to your business needs.
               </p>
               <p
-                className="max-w-lg leading-5"
+                className={clsx("max-w-lg leading-5")}
                 style={{ fontFamily: "Inter", fontWeight: 375 }}
               >
                 <Link
                   href="#contactEmailSection"
-                  className="!text-[#2B21F3] !underline"
+                  className={clsx(
+                    "!underline",
+                    darkMode ? "!text-[#756EF7]" : "!text-[#2B21F3]",
+                  )}
                 >
                   Book a call
                 </Link>{" "}
@@ -159,7 +204,12 @@ export default function Fidelity() {
               alt="Fidelity Chat"
             />
           </div>
-          <div className="absolute top-3/4 left-full h-[500px] w-[500px] rounded-full bg-purple-300 opacity-50 blur-3xl"></div>
+          <div
+            className={clsx(
+              "absolute top-3/4 left-full h-[500px] w-[500px] rounded-full bg-purple-300 blur-3xl",
+              darkMode ? "opacity-15" : "opacity-50",
+            )}
+          ></div>
         </div>
       </section>
     </>

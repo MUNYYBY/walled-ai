@@ -4,8 +4,14 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, FreeMode } from "swiper/modules";
 import Image from "next/image";
 import "swiper/css";
+import { useTheme } from "@/hooks/useTheme";
+import clsx from "clsx";
 
 export default function BackedBy({ text }: { text?: string }) {
+  //** theme context */
+  const theme = useTheme();
+  const { darkMode } = theme;
+
   const backedItems = [
     "/home_page/backed_by/amazon.svg",
     "/home_page/backed_by/ibda.svg",
@@ -16,9 +22,17 @@ export default function BackedBy({ text }: { text?: string }) {
   ];
 
   return (
-    <section className="relative w-full overflow-hidden bg-[#E0DEEC] py-20">
+    <section
+      className={clsx(
+        "relative w-full overflow-hidden py-20 transition-all duration-500",
+        darkMode ? "bg-[#141320]" : "bg-[#E0DEEC]",
+      )}
+    >
       <h3
-        className="mb-3 text-center !text-[1.125rem] !text-[#8281B1]"
+        className={clsx(
+          "mb-3 text-center !text-[1.125rem]",
+          darkMode ? "!text-[#9998C9]" : "!text-[#8281B1]",
+        )}
         style={{
           fontFamily: "Inter",
           fontWeight: 300,

@@ -104,7 +104,10 @@ export default function DeploymentGuardrails() {
             src="/home_page/deployment_bg-mobile.svg"
             height={100}
             width={100}
-            className="h-full w-full object-cover"
+            className={clsx(
+              "h-full w-full object-cover",
+              darkMode && "opacity-10",
+            )}
             alt="bg"
           />
         </div>

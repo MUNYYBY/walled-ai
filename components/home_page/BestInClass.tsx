@@ -1,28 +1,29 @@
 "use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useRef } from "react";
 import { useTheme } from "@/hooks/useTheme";
 import { motion, useInView } from "framer-motion";
 
-export default function BestInClass() {
+const BestInClass = () => {
   /** theme context */
   const { darkMode, setDarkMode } = useTheme();
 
   // Create a ref for the component
   const sectionRef = useRef(null);
 
-  // Use Framer Motion's useInView hook with more sensitive settings
   const isInView = useInView(sectionRef, {
-    amount: 0.3, // Very sensitive - only needs 30% to be considered "in view"
+    amount: 0.2,
     once: false, // Continue to track visibility changes
   });
-
-  // Update dark mode when visibility changes
   useEffect(() => {
-    console.log("BestInClass visibility changed - isInView:", isInView);
-    setDarkMode(isInView);
-  }, [isInView, setDarkMode]); // Only depend on these two values
+    if (isInView) {
+      setDarkMode(true);
+    } else {
+      setDarkMode(false);
+    }
+  }, [isInView]);
 
   return (
     <motion.section
@@ -117,4 +118,6 @@ export default function BestInClass() {
       </div>
     </motion.section>
   );
-}
+};
+
+export default BestInClass;
