@@ -6,6 +6,8 @@ import "swiper/css";
 import "swiper/css/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import { useTheme } from "@/hooks/useTheme";
+import clsx from "clsx";
 
 const TEAM = [
   {
@@ -39,7 +41,7 @@ const SWIPER_BREAKPOINTS = {
   3500: { slidesPerView: 6 },
 };
 
-const ArrowIcon = () => (
+const ArrowIcon = ({ darkMode }: { darkMode: boolean }) => (
   <svg
     width="18"
     height="18"
@@ -49,13 +51,13 @@ const ArrowIcon = () => (
   >
     <path
       d="M3.42065 9.79517L13.9207 9.79517"
-      stroke="#323150"
+      stroke={darkMode ? "#F5F5F7" : "#323150"}
       strokeLinecap="round"
       strokeLinejoin="round"
     />
     <path
       d="M11.6702 7.54565L13.9202 9.79565L11.6702 12.0457"
-      stroke="#323150"
+      stroke={darkMode ? "#F5F5F7" : "#323150"}
       strokeLinecap="round"
       strokeLinejoin="round"
     />
@@ -63,12 +65,24 @@ const ArrowIcon = () => (
 );
 
 export default function Team() {
+  //** theme context */
+  const theme = useTheme();
+  const { darkMode } = theme;
+
   return (
-    <section className="bg-[#EFEFF5] py-20">
+    <section
+      className={clsx(
+        "py-20 transition-all duration-500",
+        darkMode ? "bg-[#1C1B2C]" : "bg-[#EFEFF5]",
+      )}
+    >
       <div className="container mx-auto md:w-3/4">
         <div className="mb-12 flex flex-col items-center text-center">
           <h2
-            className="text-center !text-[2.15rem] -tracking-wide !text-[#323150] md:!text-[2.75rem]"
+            className={clsx(
+              "text-center !text-[2.15rem] -tracking-wide md:!text-[2.75rem]",
+              darkMode ? "!text-[#F5F5F7]" : "!text-[#323150]",
+            )}
             style={{ fontWeight: 400, margin: 0 }}
           >
             Meet the{" "}
@@ -88,7 +102,7 @@ export default function Team() {
         </div>
         <div className="relative mx-auto mt-5 flex flex-col items-center justify-center gap-4 lg:flex-row">
           {TEAM.map((team, index) => (
-            <TeamCard {...team} key={index} />
+            <TeamCard {...team} key={index} darkMode={darkMode} />
           ))}
         </div>
       </div>
@@ -96,12 +110,20 @@ export default function Team() {
   );
 }
 
-const TeamCard = ({ image, name, designation, description }: any) => (
-  <div className="flex w-full flex-col overflow-hidden rounded-[1.75rem] bg-[#E0DFEC] p-1 transition-all lg:h-[25.5rem] lg:w-88 2xl:h-fit">
+const TeamCard = ({ image, name, designation, description, darkMode }: any) => (
+  <div
+    className={clsx(
+      "flex w-full flex-col overflow-hidden rounded-[1.75rem] p-1 transition-all lg:h-[25.5rem] lg:w-88 2xl:h-fit",
+      darkMode ? "bg-[#272638]" : "bg-[#E0DFEC]",
+    )}
+  >
     <div className="flex items-center justify-between p-3">
       <div className="flex flex-col gap-1">
         <h4
-          className="!text-[1rem] leading-5"
+          className={clsx(
+            "!text-[1rem] leading-5",
+            darkMode ? "!text-[#F5F5F7]" : "",
+          )}
           style={{
             fontFamily: "Inter",
             fontWeight: 375,
@@ -111,7 +133,10 @@ const TeamCard = ({ image, name, designation, description }: any) => (
           {name}
         </h4>
         <p
-          className="!-mt-3 !text-[0.75rem] leading-5 !text-[#8281B1]"
+          className={clsx(
+            "!-mt-3 !text-[0.75rem] leading-5",
+            darkMode ? "!text-[#9998C9]" : "!text-[#8281B1]",
+          )}
           style={{
             fontFamily: "Inter",
             fontWeight: 375,
@@ -168,7 +193,10 @@ const TeamCard = ({ image, name, designation, description }: any) => (
     <div className="flex items-center justify-between gap-1 !px-[0.925rem] !py-[1rem]">
       <div>
         <span
-          className="!text-[0.85rem] leading-tight font-semibold !text-[#323150]"
+          className={clsx(
+            "!text-[0.85rem] leading-tight font-semibold",
+            darkMode ? "!text-[#E0E0E6]" : "!text-[#323150]",
+          )}
           style={{
             fontFamily: "Inter",
             fontWeight: 400,

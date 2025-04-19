@@ -1,10 +1,33 @@
+"use client";
+
+import { useTheme } from "@/hooks/useTheme";
+import { useInView } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useRef } from "react";
 
 export default function Values() {
+  /** theme context */
+  const { darkMode, setDarkMode } = useTheme();
+
+  // Create a ref for the component
+  const sectionRef = useRef(null);
+
+  const isInView = useInView(sectionRef, {
+    amount: 0.2,
+    once: false, // Continue to track visibility changes
+  });
+  useEffect(() => {
+    if (isInView) {
+      setDarkMode(true);
+    } else {
+      setDarkMode(false);
+    }
+  }, [isInView]);
   return (
     <>
       <section
+        ref={sectionRef}
         className="flex flex-col items-center gap-10 overflow-hidden !bg-cover !bg-center !bg-no-repeat py-20"
         style={{
           background: `url('/home_page/comparison_bg.svg')`,
